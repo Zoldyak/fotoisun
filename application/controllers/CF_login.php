@@ -47,6 +47,10 @@ class CF_login extends CI_Controller{
       redirect(base_url('admin/dashbord'));
 
       }
+      if ($level == 2 && $status=='Aktif') {
+      redirect(base_url('fotographer/CP_Home'));
+
+      }
     }
     else{
       $this->session->set_flashdata('msg',
