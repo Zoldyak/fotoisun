@@ -84,14 +84,17 @@
 					<div class="card-body text-center">
 						<p class="font-20 font-wight700">Profil</p>
 						<img src="<?php echo $this->config->item('frontend') ?>/img/foto_profil/<?php echo $detail_data['foto'] ?>" alt=""
-							style="width:90px">
-
+							style="width:90px"><br>
+							<a href="#"  data-toggle="modal" data-target="#editprofil"><i class="fa fa-pencil"></i>edit</a>
 						<p class="font-20 "><?php echo $detail_data['nama_lengkap'] ?></p>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<p class="font-18">photographer profersional</p>
+						<p class="font-14"><?php echo $detail_data['alamat_lengkap'] ?> &nbsp
+							<i class="fa fa-phone"></i><?php echo $detail_data['no_hp'] ?>
+						</p>
 					</div>
 				</div>
 
@@ -172,5 +175,74 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="editprofil">
+	    <div class="modal-dialog modal-xl">
+	      <div class="modal-content">
+
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+	          <h4 class="modal-title">Modal Heading</h4>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+
+	        <!-- Modal body -->
+	        <div class="modal-body">
+						<?php
+						$user=$detail_data['username'];
+						$nama=$detail_data['nama_lengkap'];
+						$hp=$detail_data['no_hp'];
+						$alamat=$detail_data['alamat_lengkap'];
+						 ?>
+						<form class="form-horizontal"  action="<?php echo base_url('fotographer/CP_dashbord/edit')?> " method="post" enctype="multipart/form-data">
+ 		         <div class="box-header">
+ 		             <h2 class="text-green">Tambah Fotografer</h2>
+ 		         </div>
+ 		         <div class="box-body">
+ 		           <div class="form-group">
+ 		             <label for="inputEmail3" class="col-sm-2 control-label">Nama Lengkap</label>
+ 		             <div class="col-sm-10">
+ 		               <input type="hidden" name="user" value="<?php echo $user ?>">
+ 		               <input type="Text" class="form-control" id="inputEmail3" placeholder="Nama Lengkap" name="nama" value="<?php echo $nama ?>">
+ 		             </div>
+ 		           </div>
+
+ 		           <div class="form-group">
+ 		             <label for="inputEmail3" class="col-sm-2 control-label">No.HP</label>
+ 		             <div class="col-sm-10">
+ 		               <input type="Text" class="form-control" id="inputEmail3" placeholder="No.HP" name="HP" value="<?php echo $hp ?>">
+ 		             </div>
+ 		           </div>
+ 		           <div class="form-group">
+ 		             <label for="inputEmail3" class="col-sm-2 control-label">Alamat Lengkap</label>
+ 		             <div class="col-sm-10">
+ 		               <textarea name="Alamat" rows="8" cols="80" class="form-control" placeholder="Alamat Sesuai KTP" ><?php echo $alamat ?></textarea>
+ 		             </div>
+ 		           </div>
+ 		           <div class="form-group">
+ 		             <label for="inputEmail3" class="col-sm-2 control-label">Foto</label>
+ 		             <div class="col-sm-10">
+ 		               <input type="file" class="form-control-file" id="inputEmail3" placeholder="Foto" name="foto" >
+ 		             </div>
+ 		           </div>
+ 		           <div class="form-group center-block">
+ 		               <label for="inputEmail3" class="col-sm-2 control-label"></label>
+ 		             <div class="col-sm-2 ">
+ 		               <br>
+ 		             <input type="submit" name="" value="kirim" class="btn btn-info" id="myBtn">
+ 		             </div>
+ 		           </div>
+
+ 		         </div>
+ 		       </form>
+	        </div>
+
+	        <!-- Modal footer -->
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        </div>
+
+	      </div>
+	    </div>
+	  </div>
 	</div>
 </section>
