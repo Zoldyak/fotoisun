@@ -1,6 +1,7 @@
 <section class="our-team-area section-padding-80-50">
   <div class="container">
     <div class="row">
+      
 
       <?php foreach ($daftar as $row): ?>
         <!-- start item -->

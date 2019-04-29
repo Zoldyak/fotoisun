@@ -39,7 +39,7 @@ class CF_login extends CI_Controller{
       $status=$row['status'];
 
       $this->session->set_userdata('coba','administrator');
-      $this->session->set_userdata('username', $row['username']);
+      $this->session->set_userdata('User', $row['username']);
       $this->session->set_userdata('Level', $row['level']);
       $this->session->set_userdata('nama_lengkap',  $row['nama_lengkap']);
     }
@@ -53,10 +53,13 @@ class CF_login extends CI_Controller{
       }
     }
     else{
-      $this->session->set_flashdata('msg',
-              '<div class="alert alert-danger">
-                Login Gagal
-              </div>');
+       $this->session->set_flashdata('msg','<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>gagal login</strong></div>');
+       redirect('CF_home');
+      // $this->session->set_userdata('gagal_login','Gagal Login');
+      // $this->session->set_flashdata('msg',
+      //         '<div class="alert alert-danger">
+      //           Login Gagal
+      //         </div>');
       // $load->view('login');
     }
 

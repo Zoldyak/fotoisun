@@ -12,7 +12,6 @@ class CF_photographer extends CI_Controller{
 
   function index()
   {
-    $tes="tes";
     $load=$this->load;
     $listdata= $this->MF_user->list_fotografer()->result_array();
     $data = array('halaman' => 'photographer.php',

@@ -1,7 +1,9 @@
 <section class="our-team-area section-padding-80-50">
   <div class="container">
     <div class="row">
-
+      <div class="col-md-12">
+        <?php echo $this->session->flashdata('msg'); ?>
+      </div>
       <?php foreach ($daftar as $row): ?>
         <!-- start item -->
         <div class="col-sm-3 ">
