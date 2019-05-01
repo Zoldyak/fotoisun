@@ -14,6 +14,12 @@ class MP_user extends CI_Model{
    return $query1;
 
   }
+   function  list_galleri($username){
+     $this->db->select('*,galleri.foto as fotogalleri');
+     $this->db->join('user', 'user.username = galleri.username', 'left');
+     $this->db->where('galleri.username', $username);
+  return  $this->db->get('galleri');
+  }
   function detail_fotografer($username){
 
    $query1=$this->db->get_where('user', array('username' => $username));
@@ -27,4 +33,11 @@ function input_data($dataform){
     $this->db->where($where);
   $this->db->update('user',$dataform);
   }
+  function update_data_sosmed($where,$dataform){
+    $this->db->where($where);
+  $this->db->update('user',$dataform);
+  }
+  function insert_data_galleri($dataform){
+      $this->db->insert('galleri',$dataform);
+        }
 }

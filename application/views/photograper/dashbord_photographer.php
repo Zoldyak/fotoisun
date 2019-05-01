@@ -1,3 +1,9 @@
+<?php
+$user=$detail_data['username'];
+$facebook=$detail_data['facebook'];
+$twitter=$detail_data['twitter'];
+$instagram=$detail_data['instagram'];
+ ?>
 <section class="breadcrumb-area bg-img bg-overlay jarallax"
 	style="background-image: url(<?php echo $this->config->item('frontend') ?>/img/bg-img/slide1.jpeg);">
 	<div class="container h-100">
@@ -101,36 +107,34 @@
 			</div>
 			<div class="col-md-4">
 				<ul class="list-group">
-					<li class="list-group-item list-group-item-secondary font-wight700">Sosial media</li>
-					<li class="list-group-item list-group-item-primary"><i class="fa fa-facebook"></i> Dhesyani</li>
-					<li class="list-group-item list-group-item-danger"><i class="fa fa-twitter"></i> Dhesyani</li>
-					<li class="list-group-item list-group-item-success"><i class="fa fa-instagram"></i> Dhesyani</li>
+					<li class="list-group-item list-group-item-secondary font-wight700">Sosial media  </li>
+					<li class="list-group-item list-group-item-primary"><i class="fa fa-facebook"></i> <?php echo $facebook ?><a href="#"  class="text-right" data-toggle="modal" data-target="#editsosmedfacebook"><i class="fa fa-pencil"></i>edit</a></li>
+					<li class="list-group-item list-group-item-danger"><i class="fa fa-twitter"></i> <?php echo $twitter ?><a href="#"  class="text-right" data-toggle="modal" data-target="#editsosmedtwitter"><i class="fa fa-pencil"></i>edit</a></li>
+					<li class="list-group-item list-group-item-success"><i class="fa fa-instagram"></i> <?php echo $instagram ?><a href="#"  class="text-right" data-toggle="modal" data-target="#editsosmedinstagram"><i class="fa fa-pencil"></i>edit</a></li>
 				</ul>
 			</div>
 			<p> <br> </p>
 			<div class="col-md-12 ">
 
 				<div class="row">
-					<div class="col-md-7 border_1px scroll-comament border_1px">
-						<span class="font-20 font-wight700">Gallery</span>
+					<div class="col-md-12 border_1px scroll-comament border_1px">
+						<div class="text-left">
+								<span class="font-20 font-wight700">Gallery</span>
+
+								<button type="button" class="btn btn-info" name="button"  data-toggle="modal" data-target="#tambahfoto"><i class="fa fa-plus" aria-hidden="true"></i></button>
+						</div>
+
 						<div class="row">
+							<?php foreach ($list_galleri as $rowgaleri): ?>
+
+
 							<div class="col-md-4">
-								<a data-toggle="modal" data-target="#myModal">
-									<img src="<?php echo $this->config->item('frontend') ?>/img/gallery/gunung1.jpeg" alt="">
-								</a>
-							</div>
-							<div class="col-md-4">
-								<a data-toggle="modal" data-target="#myModal">
-									<img src="<?php echo $this->config->item('frontend') ?>/img/gallery/pantai1.jpeg" alt="">
-								</a>
-							</div>
-							<div class="col-md-4">
-								<a data-toggle="modal" data-target="#myModal">
-									<img src="<?php echo $this->config->item('frontend') ?>/img/gallery/kota1.jpeg" alt="">
+								<a data-toggle="modal" data-target="#myModal<?php echo $rowgaleri['id_galleri'] ?>">
+									<img src="<?php echo $this->config->item('frontend') ?>/img/gallery/<?php echo $rowgaleri['fotogalleri'] ?>" alt="">
 								</a>
 							</div>
 							<!-- The Modal -->
-							<div class="modal" id="myModal">
+							<div class="modal" id="myModal<?php echo $rowgaleri['id_galleri'] ?>">
 								<div class="modal-dialog">
 									<div class="modal-content">
 
@@ -142,7 +146,11 @@
 
 										<!-- Modal body -->
 										<div class="modal-body">
-											<img src="<?php echo $this->config->item('frontend') ?>/img/gallery/gunung1.jpeg" alt="">
+											<img src="<?php echo $this->config->item('frontend') ?>/img/gallery/<?php echo $rowgaleri['fotogalleri'] ?>" alt="">
+											<p>fotographer:<?php echo $rowgaleri['nama_lengkap'] ?></p>
+											<p>Nama Lokasi:<?php echo $rowgaleri['lokasi'] ?></p>
+											<p>kategori Lokasi:<?php echo $rowgaleri['kategori_lokasi'] ?></p>
+											<p>Jenis foto:<?php echo $rowgaleri['jenis_foto'] ?></p>
 										</div>
 
 										<!-- Modal footer -->
@@ -153,9 +161,10 @@
 									</div>
 								</div>
 							</div>
+							<?php endforeach; ?>
 						</div>
 					</div>
-					<div class="col-md-5">
+					<!-- <div class="col-md-5">
 						<div class="card">
 							<div class="card-header">Live chat</div>
 							<div class="card-body">
@@ -171,7 +180,7 @@
 								</form>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -195,7 +204,7 @@
 						 ?>
 						<form class="form-horizontal"  action="<?php echo base_url('fotographer/CP_dashbord/edit')?> " method="post" enctype="multipart/form-data">
  		         <div class="box-header">
- 		             <h2 class="text-green">Tambah Fotografer</h2>
+ 		             <h2 class="text-green">Edit Fotografer</h2>
  		         </div>
  		         <div class="box-body">
  		           <div class="form-group">
@@ -244,5 +253,227 @@
 	      </div>
 	    </div>
 	  </div>
+		<!--start modal sosmed -->
+
+		<!-- start facebook -->
+		<div class="modal fade" id="editsosmedfacebook">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Modal Heading</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+
+						<form class="form-horizontal"  action="<?php echo base_url('fotographer/CP_dashbord/editsosmed')?> " method="post" enctype="multipart/form-data">
+						 <div class="box-header">
+								 <h2 class="text-green">Edit Facebook</h2>
+						 </div>
+						 <div class="box-body">
+							 <div class="form-group">
+								 <label for="inputEmail3" class="col-sm-2 control-label">Facebook</label>
+								 <div class="col-sm-10">
+									 <input type="hidden" name="user" value="<?php echo $user ?>">
+									 <input type="hidden" name="tipe_sosmed" value="facebook">
+									 <input type="Text" class="form-control" id="inputEmail3" placeholder="Nama Lengkap" name="nama_sosmed" value="<?php echo $facebook ?>">
+								 </div>
+							 </div>
+							 <div class="form-group center-block">
+									 <label for="inputEmail3" class="col-sm-2 control-label"></label>
+								 <div class="col-sm-2 ">
+									 <br>
+								 <input type="submit" name="" value="kirim" class="btn btn-info" id="myBtn">
+								 </div>
+							 </div>
+
+						 </div>
+					 </form>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- close facebook -->
+
+		<!-- start twitter -->
+		<div class="modal fade" id="editsosmedtwitter">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Modal Heading</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+
+						<form class="form-horizontal"  action="<?php echo base_url('fotographer/CP_dashbord/editsosmed')?> " method="post" enctype="multipart/form-data">
+						 <div class="box-header">
+								 <h2 class="text-green">Edit Twitter</h2>
+						 </div>
+						 <div class="box-body">
+							 <div class="form-group">
+								 <label for="inputEmail3" class="col-sm-2 control-label">Twitter</label>
+								 <div class="col-sm-10">
+									 <input type="hidden" name="user" value="<?php echo $user ?>">
+									 <input type="hidden" name="tipe_sosmed" value="twitter">
+									 <input type="Text" class="form-control" id="inputEmail3" placeholder="Nama Lengkap" name="nama_sosmed" value="<?php echo $twitter ?>">
+								 </div>
+							 </div>
+							 <div class="form-group center-block">
+									 <label for="inputEmail3" class="col-sm-2 control-label"></label>
+								 <div class="col-sm-2 ">
+									 <br>
+								 <input type="submit" name="" value="kirim" class="btn btn-info" id="myBtn">
+								 </div>
+							 </div>
+
+						 </div>
+					 </form>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- close twitter -->
+
+		<!-- start instagram -->
+		<div class="modal fade" id="editsosmedinstagram">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Modal Heading</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+
+						<form class="form-horizontal"  action="<?php echo base_url('fotographer/CP_dashbord/editsosmed')?> " method="post" enctype="multipart/form-data">
+						 <div class="box-header">
+								 <h2 class="text-green">Edit Twitter</h2>
+						 </div>
+						 <div class="box-body">
+							 <div class="form-group">
+								 <label for="inputEmail3" class="col-sm-2 control-label">instagram</label>
+								 <div class="col-sm-10">
+									 <input type="hidden" name="user" value="<?php echo $user ?>">
+									 <input type="hidden" name="tipe_sosmed" value="instagram">
+									 <input type="Text" class="form-control" id="inputEmail3" placeholder="Nama Lengkap" name="nama_sosmed" value="<?php echo $instagram ?>">
+								 </div>
+							 </div>
+							 <div class="form-group center-block">
+									 <label for="inputEmail3" class="col-sm-2 control-label"></label>
+								 <div class="col-sm-2 ">
+									 <br>
+								 <input type="submit" name="" value="kirim" class="btn btn-info" id="myBtn">
+								 </div>
+							 </div>
+
+						 </div>
+					 </form>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- close instagram -->
+		<!-- close modal sosmed -->
+
+		<!-- start modal tambah foto -->
+		<div class="modal fade" id="tambahfoto">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Modal Heading</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<form class="form-horizontal"  action="<?php echo base_url('fotographer/CP_dashbord/add_foto')?> " method="post" enctype="multipart/form-data">
+						 <div class="box-header">
+								 <h2 class="text-green">Tambah Foto</h2>
+						 </div>
+						 <div class="box-body">
+							 <div class="form-group">
+								 <label for="inputEmail3" class="col-sm-2 control-label">Nama Lokasi</label>
+								 <div class="col-sm-10">
+									 <input type="hidden" name="user" value="<?php echo $user ?>">
+									 <input type="Text" class="form-control" id="inputEmail3" placeholder="Nama Lokasi" name="lokasi" value="">
+								 </div>
+							 </div>
+
+							 <div class="form-group">
+								 <label for="inputEmail3" class="col-sm-2 control-label">Kategori Lokasi</label>
+								 <div class="col-sm-10">
+									 <select class="form-control" name="kategori_lokasi">
+										 <option value="Gunung">Gunung</option>
+										 <option value="Pantai">Pantai</option>
+										 <option value="Kota">Kota</option>
+									 </select>
+								 </div>
+							 </div>
+							 <div class="form-group">
+								 <label for="inputEmail3" class="col-sm-2 control-label">Jenis Foto</label>
+								 <div class="col-sm-10">
+									 <select class="form-control" name="jenis_foto">
+										 <option value="Pre-wedding">Pre-wedding</option>
+										 <option value="Wedding">Wedding</option>
+									 </select>
+								 </div>
+							 </div>
+							 <div class="form-group">
+								 <label for="inputEmail3" class="col-sm-2 control-label">Foto</label>
+								 <div class="col-sm-10">
+									 <input type="file" class="form-control-file" id="inputEmail3" placeholder="Foto" name="foto" >
+								 </div>
+							 </div>
+							 <div class="form-group center-block">
+									 <label for="inputEmail3" class="col-sm-2 control-label"></label>
+								 <div class="col-sm-2 ">
+									 <br>
+								 <input type="submit" name="" value="kirim" class="btn btn-info" id="myBtn">
+								 </div>
+							 </div>
+
+						 </div>
+					 </form>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- close modal tambah foto -->
 	</div>
 </section>

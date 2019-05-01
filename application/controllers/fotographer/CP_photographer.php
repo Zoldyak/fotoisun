@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CF_photographer extends CI_Controller{
+class CP_photographer extends CI_Controller{
 
   public function __construct()
   {
@@ -16,12 +16,12 @@ class CF_photographer extends CI_Controller{
     $listdata= $this->MF_user->list_fotografer()->result_array();
     $data = array('halaman' => 'photographer.php',
                   'daftar'  => $listdata );
-    $load->view('frontend/layout',$data);
+    $load->view('photograper/layout',$data);
   }
   function detail(){
     $load=$this->load;
     $data = array('halaman' => 'detail_photographer.php' );
-    $load->view('frontend/layout',$data);
+    $load->view('photograper/layout',$data);
   }
 
 }
