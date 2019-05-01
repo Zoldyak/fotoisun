@@ -27,8 +27,8 @@
                         <div class="classynav">
                             <ul id="nav">
                                 <li class="active"><a href="<?php echo base_url('')?>">Home</a></li>
-                                <li><a href="<?php echo base_url('CF_gallery/')?>">Gallery</a></li>
-                                <li><a href="<?php echo base_url('CF_photographer/')?>">Photographer</a></li>
+                                <li><a href="<?php echo base_url('fotographer/CF_gallery/')?>">Gallery</a></li>
+                                <li><a href="<?php echo base_url('fotographer/CF_photographer/')?>">Photographer</a></li>
                                 <li> <a href="#"><?php echo $this->session->userdata('nama_lengkap'); ?> </a>
                                   <ul class="dropdown">
                                     <li><a href="<?php echo base_url('fotographer/CP_dashbord')?>" class="" >Dashbord</a></li>
