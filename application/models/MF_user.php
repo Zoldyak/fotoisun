@@ -16,10 +16,29 @@ class MF_user extends CI_Model{
   }
   function detail_fotografer($id){
 
-   $query1=$this->db->get_where('user', array('username' => $id));
-   return $query1;
+    $this->db->select('*');
+    $this->db->join('paket_foto', 'paket_foto.username = user.username', 'left');
+    $this->db->where('user.username', $id);
+   //$query1=$this->db->get_where('user', array('username' => $username));
+   return $this->db->get('user');
 
   }
+
+  function  list_galleri($id){
+    $this->db->select('*,galleri.foto as fotogalleri');
+    $this->db->join('user', 'user.username = galleri.username', 'left');
+    $this->db->where('galleri.username', $id);
+ return  $this->db->get('galleri');
+ }
+ function detail_paket($id){
+   $this->db->select('*');
+   $this->db->join('paket_foto', 'paket_foto.username = user.username', 'left');
+   $this->db->where('user.username', $id);
+  //$query1=$this->db->get_where('user', array('username' => $username));
+  return $this->db->get('user');
+  // /return $query1;
+
+ }
 function input_data($dataform){
     $this->db->insert('user',$dataform);
       }

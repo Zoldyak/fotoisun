@@ -111,7 +111,62 @@ $instagram=$detail_data['instagram'];
 					<li class="list-group-item list-group-item-primary"><i class="fa fa-facebook"></i> <?php echo $facebook ?><a href="#"  class="text-right" data-toggle="modal" data-target="#editsosmedfacebook"><i class="fa fa-pencil"></i>edit</a></li>
 					<li class="list-group-item list-group-item-danger"><i class="fa fa-twitter"></i> <?php echo $twitter ?><a href="#"  class="text-right" data-toggle="modal" data-target="#editsosmedtwitter"><i class="fa fa-pencil"></i>edit</a></li>
 					<li class="list-group-item list-group-item-success"><i class="fa fa-instagram"></i> <?php echo $instagram ?><a href="#"  class="text-right" data-toggle="modal" data-target="#editsosmedinstagram"><i class="fa fa-pencil"></i>edit</a></li>
-				</ul>
+          <li class="list-group-item list-group-item-secondary  font-wight700">Paket Foto
+            <div  class="float-md-right">
+              <a href="#"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambahpaket"><i class="fa fa-plus"></i></a>
+            </div>
+
+          </li>
+          <?php foreach ($list_paket as $row_paket): ?>
+              <li class="list-group-item list-group-item-default font-wight700 font-12 ">
+                <div class="float-md-left"><?php echo $row_paket['nama_paket'] ?></div>
+                <div class="float-md-right"><?php echo $row_paket['harga'] ?>
+                  <a href="#"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editpaket<?php echo $row_paket['id_paket'] ?>"><i class="fa fa-pencil"></i></a>
+                    <a href="<?php echo base_url('fotographer/CP_dashbord/delete_paket/'.$row_paket['id_paket'])?>"  class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i></a>
+                </div>
+
+                <div class="modal fade" id="editpaket<?php echo $row_paket['id_paket'] ?>" tabindex="2" role="dialog" aria-labelledby="" aria-hidden="true">
+                  <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title" id="">Edit</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id=""></h4>
+                      </div>
+                      <div class="modal-body">
+                        <form class="" action="<?php echo base_url('fotographer/CP_dashbord/edit_paket')?>" method="post">
+                          <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Nama Paket</label>
+                            <div class="col-sm-10">
+                              <input type="hidden" name="id_paket" value="<?php echo $row_paket['id_paket'] ?>">
+                              <input type="Text" class="form-control" id="inputEmail3" placeholder="Nama Paket" name="nama_paket" value="<?php echo $row_paket['nama_paket'] ?>">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Harga</label>
+                            <div class="col-sm-10">
+                              <input type="hidden" name="user" value="<?php echo $user ?>">
+                              <input type="Text" class="form-control" id="inputEmail3" placeholder="Harga Paket" name="harga" value="<?php echo $row_paket['harga'] ?>">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <button type="submit" name="button" class="btn btn-info float-md-right">Tambah</button>
+
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <p class="text-Left"><?php echo $row_paket['nama_paket'] ?></p>
+                <p class="text-right"><?php echo $row_paket['harga'] ?></p> -->
+              </li>
+          <?php endforeach; ?>
+        </ul>
 			</div>
 			<p> <br> </p>
 			<div class="col-md-12 ">
@@ -476,4 +531,40 @@ $instagram=$detail_data['instagram'];
 		</div>
 		<!-- close modal tambah foto -->
 	</div>
+  <div class="modal fade" id="tambahpaket" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="">Tambah</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form class="" action="<?php echo base_url('fotographer/CP_dashbord/add_paket')?>" method="post">
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 control-label">Nama Paket</label>
+              <div class="col-sm-10">
+                <input type="hidden" name="user" value="<?php echo $user ?>">
+                <input type="Text" class="form-control" id="inputEmail3" placeholder="Nama Paket" name="nama_paket" value="">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 control-label">Harga</label>
+              <div class="col-sm-10">
+                <input type="hidden" name="user" value="<?php echo $user ?>">
+                <input type="Text" class="form-control" id="inputEmail3" placeholder="Harga Paket" name="harga" value="">
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" name="button" class="btn btn-info float-md-right">Tambah</button>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary " data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

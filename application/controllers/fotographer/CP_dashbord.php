@@ -15,10 +15,13 @@ class CP_dashbord extends CI_Controller{
     $load=$this->load;
     $username=$this->session->userdata('User');
     $listdata= $this->MP_user->detail_fotografer($username)->row_array();
-      $listdatagalleri= $this->MP_user->list_galleri($username)->result_array();
+    $listdatagalleri= $this->MP_user->list_galleri($username)->result_array();
+    $listpaket=$this->MP_user->detail_paket($username)->result_array();
     $data = array('halaman' => 'dashbord_photographer.php',
                   'detail_data'=> $listdata,
-                  'list_galleri'=>$listdatagalleri);
+                  'list_galleri'=>$listdatagalleri,
+                  'list_paket'=> $listpaket
+                );
     $load->view('photograper/layout',$data);
   }
   public function edit(){
@@ -107,5 +110,64 @@ class CP_dashbord extends CI_Controller{
                     redirect(base_url('fotographer/CP_dashbord'));
           }
       }
+  }
+  function add_paket(){
+    $load=$this->load;
+    $i=$this->input;
+
+    $valid 		= $this->form_validation;
+    $valid->set_rules('nama_paket','nama_paket','required');
+    $valid->set_rules('harga','harga','required');
+    //$valid->set_rules('jenis_foto','jenis_foto','required');
+    // $valid->set_rules('foto','foto','required');
+      if ($valid->run() != false) {
+        $dataform = array('username' =>$i->post('user') ,
+                          'nama_paket'=>$i->post('nama_paket'),
+                          'harga' =>$i->post('harga')
+                        );
+          $this->MP_user->insert_data_paket($dataform);
+          redirect(base_url('fotographer/CP_dashbord'));
+      }
+      else{
+        $this->session->set_flashdata('msg',
+                '<div class="alert alert-danger">
+                    <h4>Oppss</h4>'.$this->upload->display_errors().'
+                    <p>Tidak ada kata dinput.</p>
+                </div>');
+                redirect(base_url('fotographer/CP_dashbord'));
+      }
+
+  }
+  function edit_paket(){
+    $load=$this->load;
+    $i=$this->input;
+
+    $valid 		= $this->form_validation;
+    $valid->set_rules('nama_paket','nama_paket','required');
+    $valid->set_rules('harga','harga','required');
+    //$valid->set_rules('jenis_foto','jenis_foto','required');
+    // $valid->set_rules('foto','foto','required');
+      if ($valid->run() != false) {
+        $where = array('id_paket' => $i->post('id_paket'), );
+        $dataform = array('nama_paket'=>$i->post('nama_paket'),
+                          'harga' =>$i->post('harga')
+                        );
+          $this->MP_user->update_data_paket($where,$dataform);
+          redirect(base_url('fotographer/CP_dashbord'));
+      }
+      else{
+        $this->session->set_flashdata('msg',
+                '<div class="alert alert-danger">
+                    <h4>Oppss</h4>'.$this->upload->display_errors().'
+                    <p>Tidak ada kata dinput.</p>
+                </div>');
+                redirect(base_url('fotographer/CP_dashbord'));
+      }
+
+  }
+  function delete_paket(){
+    $id=$this->uri->segment(4);
+    $this->MP_user->delete_data_paket($id);
+      redirect(base_url('fotographer/CP_dashbord'));
   }
 }

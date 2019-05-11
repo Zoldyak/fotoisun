@@ -27,4 +27,7 @@ function input_data($dataform){
     $this->db->where($where);
   $this->db->update('user',$dataform);
   }
+  function list_data($username){
+  return   $this->db->get_where('user', array('username' => $username));
+  }
 }

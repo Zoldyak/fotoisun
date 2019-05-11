@@ -79,9 +79,9 @@ class CF_login extends CI_Controller{
   if ($valid->run() != false) {
     $username=$i->post('Username');
     $where= array('username' =>$username);
-    $jumlah=$this->MF_Register->list_data($where)->num_rows();
+    $jumlah=$this->MF_Register->list_data($username)->num_rows();
     // $jumlahuser=$this->M_Register->list_data($username)->num_rows();
-
+    //echo $jumlah;
     if ($jumlah < 1) {
       $config['upload_path'] = './assets/frontend/img/foto_profil';
       $config['allowed_types'] = 'jpg|png|jpeg|JPEG|JPG|PNG';
@@ -122,10 +122,10 @@ class CF_login extends CI_Controller{
                             </style>
                         </head>
                         <body>
-                        <p>Email ada baru saja didaftarkan sebagai user di <strong>Toms Agribis</strong> <br>
+                        <p>Email ada baru saja didaftarkan sebagai user di <strong>Foto Isun </strong> <br>
                         silakan konfirmasi jika benar ini anda '.$i->post("nama").'<p>
                         <br>
-                        <div class="box"><center><a href="http://localhost/bibit/CF_Register/update/'.$username.'">Konfirmasi</a></center></div>
+                        <div class="box"><center><a href="http://localhost/fotoisun/CF_login/update/'.$username.'">Konfirmasi</a></center></div>
                         </body>
                         </html>';
 
@@ -197,7 +197,19 @@ class CF_login extends CI_Controller{
   }
 
   function logout(){
-$this->session->sess_destroy();
-redirect(base_url());
-}
+    $this->session->sess_destroy();
+    redirect(base_url());
+    }
+    function update(){
+      $user=$this->uri->segment(3);
+      echo $user;
+      $where = array('username' => $user );
+      $dataform = array('status' => 'Aktif' );
+      $this->MF_Register->update_data($where,$dataform);
+      $this->session->set_flashdata('msg',
+              '<div class="alert alert-info">
+                 Silakan Login
+              </div>');
+         redirect(base_url(''));
+    }
 }

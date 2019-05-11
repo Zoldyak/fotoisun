@@ -49,32 +49,34 @@ cursor: pointer;
 			<!-- <h2>Our team</h2> -->
 			<div class="loadMore">
         <?php foreach ($daftar as $row): ?>
-          <div class=" item col-md-3" >
-            <div class="">
-                <div class="team-content-area text-center mb-30 wow fadeInUp" data-wow-delay="100ms">
-                    <div class="member-thumb">
-                        <img src="<?php echo $this->config->item('frontend') ?>/img/foto_profil/<?php echo $row['foto'] ?>" alt="" style="width:170px; height:170px;">
-                    </div>
+          <a href="<?php echo base_url('CF_photographer/detail/'.$row['username'])?>">
+            <div class=" item col-md-3" >
+              <div class="">
+                  <div class="team-content-area text-center mb-30 wow fadeInUp" data-wow-delay="100ms">
+                      <div class="member-thumb">
+                          <img src="<?php echo $this->config->item('frontend') ?>/img/foto_profil/<?php echo $row['foto'] ?>" alt="" style="width:170px; height:170px;">
+                      </div>
 
-                    <h5><?php echo $row['nama_lengkap'] ?></h5>
-                    <ul class="list-inline text-right">
-                      <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star-half-o text-yellow" aria-hidden="true"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                    </ul>
+                      <h5><?php echo $row['nama_lengkap'] ?></h5>
+                      <ul class="list-inline text-right">
+                        <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star-half-o text-yellow" aria-hidden="true"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                      </ul>
 
-                    <div class="member-social-info">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
+                      <div class="member-social-info">
+                          <a href="#"><i class="fa fa-facebook"></i></a>
+                          <a href="#"><i class="fa fa-twitter"></i></a>
+                          <a href="#"><i class="fa fa-linkedin"></i></a>
+                          <a href="#"><i class="fa fa-pinterest"></i></a>
+                      </div>
 
-                </div>
+                  </div>
+              </div>
             </div>
-          </div>
+          </a>
         <?php endforeach; ?>
 
 
