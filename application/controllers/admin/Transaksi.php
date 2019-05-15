@@ -1,31 +1,43 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller{
+class Transaksi extends CI_Controller{
 
   public function __construct()
   {
     parent::__construct();
     $this->load->model('MA_Register');
+    $this->load->model('MA_booking');
     //Codeigniter : Write Less Do More
   }
 
-  function list_fotografer()
+  function list_booking()
   {
-      $listdata= $this->MA_Register->list_fotografer()->result_array();
+    $listdata= $this->MA_booking->list_booking()->result_array();
+      //$listdata= $this->MA_Register->list_fotografer()->result_array();
     $data=array(
-          'halaman' => 'user/list.php',
-          'daftar'  => $listdata
+          'halaman' => 'transaksi/list.php',
+          'daftar_list'  => $listdata
     );
     $load=$this->load;
     $load->view('admin/dashbord.php',$data);
   }
-  function list_customer()
+  function list_transaksi()
   {
-      $listdata= $this->MA_Register->list_customer()->result_array();
+
+    $tanggal=date('Y-m-d');
+    $id_booking=$this->uri->segment(5);
+    $load=$this->load;
+    $username=$this->session->userdata('User');
+    $jumlah_tagihan=$this->MA_booking->tagihan($id_booking)->row_array();
+    $jumlah_traksaksi=$this->MA_booking->jumlah_transaksi_tagihan($id_booking)->row_array();
+    $listbooking= $this->MA_booking->list_booking($username)->result_array();
+    $listdata= $this->MA_booking->list_transaksi($id_booking)->result_array();
     $data=array(
-          'halaman' => 'user/list_customer.php',
-          'daftar'  => $listdata
+          'halaman' => 'transaksi/detail_transkasi.php',
+          'daftar_list'  => $listdata,
+          'tagihan'=>$jumlah_tagihan,
+          "total_tagihan"=>$jumlah_traksaksi
     );
     $load=$this->load;
     $load->view('admin/dashbord.php',$data);
@@ -76,52 +88,16 @@ class User extends CI_Controller{
     $load->view('admin/dashbord.php',$data);
   }
 
-  public function edit(){
+  public function update(){
     $load=$this->load;
     $i=$this->input;
+    $where = array('id_transaksi' =>  $i->post('id_transaksi'), );
+    $dataform = array(
+                      'status'=> $i->post('status'),
+                      'keterangan'=>$i->post('keterangan'),);
+                      $this->MA_booking->update_data($where,$dataform);
+                      redirect(base_url('admin/Transaksi/list_booking'));
 
-    $valid 		= $this->form_validation;
-    $valid->set_rules('nama','nama','required');
-    $valid->set_rules('HP','HP','required');
-    $valid->set_rules('Alamat','Alamat','required');
-    // $valid->set_rules('foto','foto','required');
-      if ($valid->run() != false) {
-        $config['upload_path'] = './assets/frontend/img/foto_profil';
-        $config['allowed_types'] = 'jpg|png|jpeg|JPEG|JPG|PNG';
-        $config['max_size']  = '3048';
-        $config['remove_space'] = TRUE;
-        $load->library('upload',$config);
-        $this->upload->initialize($config);
-          if ($this->upload->do_upload('foto')) {
-            $fileFoto1 = array('upload_data' => $this->upload->data());
-            $where = array('username' => $i->post('user'), );
-            $dataform = array('nama_lengkap' => $i->post('nama'),
-                              'alamat_lengkap'=>$i->post('Alamat'),
-                              'no_hp'=>$i->post('HP'),
-                              'foto'=>$fileFoto1['upload_data']['file_name'],
-                              'level'=> 2,
-                               'status'=>'Aktif');
-                              $this->MA_Register->update_data($where,$dataform);
-
-                                 redirect(base_url('admin/User/list_fotografer'));
-          }
-          else{
-            $this->session->set_flashdata('msg',
-                    '<div class="alert alert-danger">
-                        <h4>Oppss</h4>'.$this->upload->display_errors().'
-                        <p>Tidak ada kata dinput.</p>
-                    </div>');
-                    redirect(base_url('admin/User/tambah'));
-          }
-      }
-    $id=$this->uri->segment(4);
-    $listdata= $this->MA_Register->detail_fotografer($id)->result_array();
-    $data=array(
-          'halaman' => 'user/form.php',
-          'jenis_form'=>'edit',
-          'data_edit'  => $listdata
-    );
-        $load->view('admin/dashbord.php',$data);
   }
   public function delete(){
     $load=$this->load;

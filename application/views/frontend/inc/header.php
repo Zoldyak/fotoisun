@@ -29,7 +29,17 @@
                                 <li class="active"><a href="<?php echo base_url('')?>">Home</a></li>
                                 <li><a href="<?php echo base_url('CF_gallery/')?>">Gallery</a></li>
                                 <li><a href="<?php echo base_url('CF_photographer/')?>">Photographer</a></li>
+                                <?php if ($this->session->userdata('User')!= null){ ?>
+                                  <li> <a href="#"><?php echo $this->session->userdata('User'); ?> </a>
+                                    <ul class="dropdown">
+                                      <li><a href="<?php echo base_url('CF_dashbord')?>" class="" >Dashbord</a></li>
+                                      <li><a href="<?php echo base_url('CF_login/logout')?>" class="" >Logout</a></li>
+                                    </ul>
+                                  </li>
+                                <?php } else{?>
+
                                 <li><a href="#" class="" data-toggle="modal" data-target="#myModal">Login</a></li>
+                              <?php } ?>
                             </ul>
                             <div class="modal fade" id="myModal">
                               <div class="modal-dialog modal-lg">

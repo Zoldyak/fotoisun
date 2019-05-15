@@ -37,9 +37,8 @@
           <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
         </ul>
       </li> -->
-      <!-- <li><a href="<?php echo base_url('berita/list_berita')?>"><i class="fa fa-book"></i> <span>Berita</span></a></li>
-      <li><a href="#"><i class="fa fa-calendar"></i> <span>Agenda</span></a></li>
-      <li><a href="#"><i class="fa fa-book"></i> <span>Dokumen</span></a></li> -->
+      <li><a href="<?php echo base_url('admin/Transaksi/list_booking')?>"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
+
       <li class="treeview">
         <a href="#">
           <i class="fa fa-user-o"></i>
@@ -48,7 +47,7 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="<?php echo base_url('admin/User/list_fotografer')?>"><i class="fa fa-circle-o"></i> Fotografer</a></li>
-          <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Customer</a></li>
+          <li><a href="<?php echo base_url('admin/User/list_customer')?>"><i class="fa fa-circle-o"></i> Customer</a></li>
         </ul>
       </li>
       <!-- <li>

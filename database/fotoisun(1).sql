@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 12 Mei 2019 pada 00.28
+-- Generation Time: 16 Mei 2019 pada 00.10
 -- Versi Server: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -19,6 +19,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `fotoisun`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `booking`
+--
+
+CREATE TABLE IF NOT EXISTS `booking` (
+`id_booking` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `id_paket` int(11) NOT NULL,
+  `photograper` varchar(50) NOT NULL,
+  `tanggal_booking` date NOT NULL,
+  `tipe_foto` varchar(15) NOT NULL,
+  `persetujuan` varchar(100) NOT NULL,
+  `status_booking` varchar(10) NOT NULL,
+  `jenis_pembayaran` varchar(15) NOT NULL,
+  `lokasi_foto` text NOT NULL,
+  `keterangan` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `booking`
+--
+
+INSERT INTO `booking` (`id_booking`, `username`, `id_paket`, `photograper`, `tanggal_booking`, `tipe_foto`, `persetujuan`, `status_booking`, `jenis_pembayaran`, `lokasi_foto`, `keterangan`) VALUES
+(2, 'firman.akun2@gmail.com', 1, 'Dhesyani putri', '2019-05-16', 'Pre-wedding', 'Disetujui', 'baru', 'Transfer', 'Baluran', 'saya setuju');
 
 -- --------------------------------------------------------
 
@@ -53,15 +80,39 @@ CREATE TABLE IF NOT EXISTS `paket_foto` (
   `username` varchar(100) NOT NULL,
   `nama_paket` varchar(15) NOT NULL,
   `harga` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `paket_foto`
 --
 
 INSERT INTO `paket_foto` (`id_paket`, `username`, `nama_paket`, `harga`) VALUES
-(1, 'dhesyani@gmail.com', 'aa', 50000),
+(1, 'dhesyani@gmail.com', 'Foto dan album', 5000000),
 (2, 'dhesyani@gmail.com', 'b', 1500);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksi`
+--
+
+CREATE TABLE IF NOT EXISTS `transaksi` (
+`id_transaksi` int(11) NOT NULL,
+  `id_booking` int(11) NOT NULL,
+  `tanggal_transaksi` date NOT NULL,
+  `jumlah_transaksi` int(11) NOT NULL,
+  `foto_transaksi` varchar(40) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `keterangan` text
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `id_booking`, `tanggal_transaksi`, `jumlah_transaksi`, `foto_transaksi`, `status`, `keterangan`) VALUES
+(1, 2, '2019-05-15', 2500000, 'Desert.jpg', 'Berhasil', 'transaksi berhasil'),
+(3, 2, '2019-05-16', 2500000, 'Hydrangeas.jpg', 'Berhasil', NULL);
 
 -- --------------------------------------------------------
 
@@ -97,6 +148,12 @@ INSERT INTO `user` (`username`, `password`, `nama_lengkap`, `no_hp`, `alamat_len
 --
 
 --
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+ ADD PRIMARY KEY (`id_booking`), ADD KEY `booking_ibfk_1` (`username`), ADD KEY `booking_ibfk_2` (`id_paket`);
+
+--
 -- Indexes for table `galleri`
 --
 ALTER TABLE `galleri`
@@ -109,6 +166,12 @@ ALTER TABLE `paket_foto`
  ADD PRIMARY KEY (`id_paket`);
 
 --
+-- Indexes for table `transaksi`
+--
+ALTER TABLE `transaksi`
+ ADD PRIMARY KEY (`id_transaksi`), ADD KEY `transaksi_ibfk_1` (`id_booking`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -119,6 +182,11 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `galleri`
 --
 ALTER TABLE `galleri`
@@ -127,7 +195,29 @@ MODIFY `id_galleri` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `paket_foto`
 --
 ALTER TABLE `paket_foto`
-MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `transaksi`
+--
+ALTER TABLE `transaksi`
+MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `booking`
+--
+ALTER TABLE `booking`
+ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`id_paket`) REFERENCES `paket_foto` (`id_paket`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ketidakleluasaan untuk tabel `transaksi`
+--
+ALTER TABLE `transaksi`
+ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_booking`) REFERENCES `booking` (`id_booking`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

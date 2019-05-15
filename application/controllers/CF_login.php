@@ -51,10 +51,15 @@ class CF_login extends CI_Controller{
       redirect(base_url('fotographer/CP_Home'));
 
       }
+      if ($level == 3 && $status=='Aktif') {
+      redirect(base_url('CF_Home'));
+
+      }
     }
+
     else{
        $this->session->set_flashdata('msg','<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>gagal login</strong></div>');
-       redirect('CF_home');
+       redirect(base_url('CF_home'));
       // $this->session->set_userdata('gagal_login','Gagal Login');
       // $this->session->set_flashdata('msg',
       //         '<div class="alert alert-danger">

@@ -101,6 +101,17 @@ $instagram=$detail_data['instagram'];
 						<p class="font-14"><?php echo $detail_data['alamat_lengkap'] ?> &nbsp
 							<i class="fa fa-phone"></i><?php echo $detail_data['no_hp'] ?>
 						</p>
+            <?php
+
+            if ($this->session->userdata('User') != null) {?>
+              <!-- <a href="<?php echo base_url('CF_photographer/detail/'.$detail_data['username'])?>" class="btn btn-primary text-right">Detail</a>
+              <a href="<?php echo base_url('CF_gallery/'.$detail_data['username'])?>" class="btn btn-primary btn-sm">Gallery</a> -->
+              <a href="<?php echo base_url('CF_pesan/form_add/'.$detail_data['username'])?>"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Booking1</a>
+          <?php  }
+          else { ?>
+            <a href="#"  class="btn btn-primary btn-sm" id="notif_login"><i class="fa fa-plus"></i>Booking</a>
+          <?php  } ?>
+
 					</div>
 				</div>
 
@@ -269,5 +280,11 @@ $instagram=$detail_data['instagram'];
 
 
 	</div>
+<script>
+$(document).ready(function(){
+  $('#notif_login').on('click',function(){
+     alert("Anda Harus login Terlebih Dahulu");
+  });
+});
 
-</section>
+</script>

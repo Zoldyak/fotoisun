@@ -20,7 +20,7 @@
                   <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
                 </ul>
                 <div class="text-right">
-                  <p class="text-red">Photographer</p><a href="#" class="btn btn-primary text-right">Detail</a>
+                  <p class="text-red">Photographer</p><a href="<?php echo base_url('CF_photographer/detail/'.$row['username'])?>" class="btn btn-primary text-right">Detail</a>
                 </div>
 
             </div>

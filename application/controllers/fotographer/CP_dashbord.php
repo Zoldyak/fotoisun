@@ -7,6 +7,7 @@ class CP_dashbord extends CI_Controller{
   {
     parent::__construct();
     $this->load->model('MP_user');
+    $this->load->model(array('MP_user','MP_booking'));
     //Codeigniter : Write Less Do More
   }
 
@@ -169,5 +170,88 @@ class CP_dashbord extends CI_Controller{
     $id=$this->uri->segment(4);
     $this->MP_user->delete_data_paket($id);
       redirect(base_url('fotographer/CP_dashbord'));
+  }
+
+  function daftar_booking()
+  {
+    $load=$this->load;
+    $nama=$this->session->userdata('nama_lengkap');
+    $listdata= $this->MP_booking->list_booking($nama)->result_array();
+    // print_r($listdata);
+    $data = array('halaman' => 'list_booking.php',
+                  'daftar_list'=> $listdata
+                );
+    $load->view('photograper/layout',$data);
+  }
+  public function persetujuan()
+  {
+    $load=$this->load;
+    $i=$this->input;
+    $where = array('id_booking' =>  $i->post('id_booking'), );
+    $dataform = array(
+                      'persetujuan'=> $i->post('persetujuan'),
+                      'keterangan'=>$i->post('keterangan'),);
+                      $this->MP_booking->update_data($where,$dataform);
+                        redirect(base_url('fotographer/CP_dashbord/daftar_booking'));
+
+  }
+
+  function transaksi()
+  {
+    $tanggal=date('Y-m-d');
+    $id_booking=$this->uri->segment(5);
+    $load=$this->load;
+    $username=$this->session->userdata('User');
+    $jumlah_tagihan=$this->MP_booking->tagihan($id_booking)->row_array();
+    $jumlah_traksaksi=$this->MP_booking->jumlah_transaksi_tagihan($id_booking)->row_array();
+    $listbooking= $this->MP_booking->list_booking($username)->result_array();
+    $listdata= $this->MP_booking->list_transaksi($id_booking)->result_array();
+
+
+    // print_r($listdata);
+    $data = array('halaman' => 'transaksi.php',
+                  'daftar_list'=> $listdata,
+                  'tagihan'=>$jumlah_tagihan,
+                  "total_tagihan"=>$jumlah_traksaksi
+                );
+    $load->view('photograper/layout',$data);
+  }
+  public function add_transaksi(){
+    $load=$this->load;
+    $i=$this->input;
+    $tanggal=date('Y-m-d');
+    $id_booking=$i->post('id_booking');
+    $valid 		= $this->form_validation;
+    $valid->set_rules('jumlah','jumlah','required');
+
+    // $valid->set_rules('foto','foto','required');
+      if ($valid->run() != false) {
+        $config['upload_path'] = './assets/frontend/img/transaksi';
+        $config['allowed_types'] = 'jpg|png|jpeg|JPEG|JPG|PNG';
+        $config['max_size']  = '3048';
+        $config['remove_space'] = TRUE;
+        $load->library('upload',$config);
+        $this->upload->initialize($config);
+          if ($this->upload->do_upload('foto')) {
+            $fileFoto1 = array('upload_data' => $this->upload->data());
+            $dataform = array('jumlah_transaksi' => $i->post('jumlah'),
+                              'tanggal_transaksi'=>$tanggal,
+                              'id_booking'=>$id_booking,
+                              'foto_transaksi'=>$fileFoto1['upload_data']['file_name'],
+                              'status'=> "Berhasil",
+                               'keterangan'=>null);
+                              $this->MP_booking->insert_transaksi($dataform);
+                              redirect(base_url('fotographer/CP_dashbord'));
+          }
+
+          else{
+            $this->session->set_flashdata('msg',
+                    '<div class="alert alert-danger">
+                        <h4>Oppss</h4>'.$this->upload->display_errors().'
+                        <p>Tidak ada kata dinput.</p>
+                    </div>');
+                    redirect(base_url('fotographer/CP_dashbord'));
+          }
+      }
   }
 }

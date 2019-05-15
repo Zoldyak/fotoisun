@@ -14,6 +14,12 @@ class MA_Register extends CI_Model{
    return $query1;
 
   }
+  Function list_customer(){
+
+   $query1=$this->db->get_where('user', array('level' => 3,'status'=>"Aktif" ));
+   return $query1;
+
+  }
   function detail_fotografer($id){
 
    $query1=$this->db->get_where('user', array('username' => $id));

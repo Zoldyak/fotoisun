@@ -54,11 +54,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   </div>
     </div>
 </footer>
-
+<!-- jQuery 3.4.1 -->
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" charset="utf-8"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js " charset="utf-8"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" charset="utf-8"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js " charset="utf-8"></script>
 
 <!-- **** All JS Files ***** -->
 <!-- jQuery 2.2.4 -->
-<script src="<?php echo $this->config->item('frontend') ?>/js/jquery.min.js"></script>
+<!-- <script src="<?php echo $this->config->item('frontend') ?>/js/jquery.min.js"></script> -->
 <!-- Popper -->
 <script src="<?php echo $this->config->item('frontend') ?>/js/popper.min.js"></script>
 <!-- Bootstrap -->

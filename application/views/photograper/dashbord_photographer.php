@@ -101,6 +101,8 @@ $instagram=$detail_data['instagram'];
 						<p class="font-14"><?php echo $detail_data['alamat_lengkap'] ?> &nbsp
 							<i class="fa fa-phone"></i><?php echo $detail_data['no_hp'] ?>
 						</p>
+
+              <a href="<?php echo base_url('fotographer/CP_dashbord/daftar_booking/'.$this->session->userdata('nama_lengkap'))?>"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Daftar Booking1</a>
 					</div>
 				</div>
 
