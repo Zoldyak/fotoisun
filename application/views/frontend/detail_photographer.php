@@ -106,10 +106,47 @@ $instagram=$detail_data['instagram'];
             if ($this->session->userdata('User') != null) {?>
               <!-- <a href="<?php echo base_url('CF_photographer/detail/'.$detail_data['username'])?>" class="btn btn-primary text-right">Detail</a>
               <a href="<?php echo base_url('CF_gallery/'.$detail_data['username'])?>" class="btn btn-primary btn-sm">Gallery</a> -->
-              <a href="<?php echo base_url('CF_pesan/form_add/'.$detail_data['username'])?>"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Booking1</a>
-          <?php  }
+              <a href="<?php echo base_url('CF_pesan/form_add/'.$detail_data['username'])?>"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Booking</a>
+              <a href="#"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#pesan"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+              <div class="modal fade" id="pesan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Pesan</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="" action="<?php echo base_url('Cf_inbox/add_pesan')?>" method="post">
+                        <div class="form-group row">
+                          <label for="staticEmail" class="col-sm-2 col-form-label">Photographer</label>
+                          <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<?php echo $this->uri->segment(3)  ?>">
+                              <input type="hidden"  name="photographer" class="form-control-plaintext" id="staticEmail" value="<?php echo $this->uri->segment(3)  ?>">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputPassword" class="col-sm-2 col-form-label">Pesan</label>
+                          <div class="col-sm-10">
+                            <textarea rows="8" cols="80" class="form-control" name="pesan" placeholder="Pesan"></textarea>
+                            <!-- <input type="password" class="form-control" id="inputPassword" placeholder="Password"> -->
+                          </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php  }
           else { ?>
             <a href="#"  class="btn btn-primary btn-sm" id="notif_login"><i class="fa fa-plus"></i>Booking</a>
+
           <?php  } ?>
 
 					</div>

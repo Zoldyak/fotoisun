@@ -30,10 +30,17 @@
                                 <li><a href="<?php echo base_url('CF_gallery/')?>">Gallery</a></li>
                                 <li><a href="<?php echo base_url('CF_photographer/')?>">Photographer</a></li>
                                 <?php if ($this->session->userdata('User')!= null){ ?>
+                                <li id="inbox"></li>
+                              <?php } else{?>
+                                
+                            <?php }if ($this->session->userdata('User')!= null){ ?>
                                   <li> <a href="#"><?php echo $this->session->userdata('User'); ?> </a>
                                     <ul class="dropdown">
                                       <li><a href="<?php echo base_url('CF_dashbord')?>" class="" >Dashbord</a></li>
                                       <li><a href="<?php echo base_url('CF_login/logout')?>" class="" >Logout</a></li>
+                                      <!-- <div class="" id="inbox">
+
+                                      </div> -->
                                     </ul>
                                   </li>
                                 <?php } else{?>

@@ -29,6 +29,11 @@
                                 <li class="active"><a href="<?php echo base_url('')?>">Home</a></li>
                                 <li><a href="<?php echo base_url('fotographer/CP_gallery/')?>">Gallery</a></li>
                                 <li><a href="<?php echo base_url('fotographer/CP_photographer/')?>">Photographer</a></li>
+                                <?php if ($this->session->userdata('User')!= null){ ?>
+                                <li id="inbox"></li>
+                              <?php } else{?>
+
+                            <?php }?>
                                 <li> <a href="#"><?php echo $this->session->userdata('nama_lengkap'); ?> </a>
                                   <ul class="dropdown">
                                     <li><a href="<?php echo base_url('fotographer/CP_dashbord')?>" class="" >Dashbord</a></li>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 16 Mei 2019 pada 00.10
+-- Generation Time: 24 Mei 2019 pada 19.01
 -- Versi Server: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -50,6 +50,31 @@ INSERT INTO `booking` (`id_booking`, `username`, `id_paket`, `photograper`, `tan
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `detail_inbox`
+--
+
+CREATE TABLE IF NOT EXISTS `detail_inbox` (
+`id_detail_inbox` int(11) NOT NULL,
+  `id_list_inbox` int(11) NOT NULL,
+  `pesan` text NOT NULL,
+  `status_terbaca` varchar(15) NOT NULL,
+  `tanggal_pesan` datetime NOT NULL,
+  `status_pengirim` int(11) NOT NULL,
+  `status_terbaca_custumer` varchar(15) NOT NULL,
+  `status_terbaca_photographer` varchar(15) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `detail_inbox`
+--
+
+INSERT INTO `detail_inbox` (`id_detail_inbox`, `id_list_inbox`, `pesan`, `status_terbaca`, `tanggal_pesan`, `status_pengirim`, `status_terbaca_custumer`, `status_terbaca_photographer`) VALUES
+(1, 1, 'saya adalah custumer', '', '2019-05-24 06:46:48', 1, 'terbaca', 'terbaca'),
+(3, 1, 'saya adalah PG', '', '2019-05-24 11:57:03', 2, 'new', 'terbaca');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `galleri`
 --
 
@@ -60,14 +85,36 @@ CREATE TABLE IF NOT EXISTS `galleri` (
   `jenis_foto` varchar(15) NOT NULL,
   `kategori_lokasi` varchar(15) NOT NULL,
   `foto` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `galleri`
 --
 
 INSERT INTO `galleri` (`id_galleri`, `username`, `lokasi`, `jenis_foto`, `kategori_lokasi`, `foto`) VALUES
-(1, 'dhesyani@gmail.com', 'Pulau Merah', 'Pre-wedding', 'Pantai', 'pantai31.jpeg');
+(1, 'dhesyani@gmail.com', 'Pulau Merah', 'Pre-wedding', 'Pantai', 'pantai31.jpeg'),
+(2, 'dhesyani@gmail.com', 'test fot', 'Pre-wedding', 'Gunung', 'Lighthouse.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `list_inbox`
+--
+
+CREATE TABLE IF NOT EXISTS `list_inbox` (
+`id_list_inbox` int(11) NOT NULL,
+  `custumer` varchar(100) NOT NULL,
+  `photographer` varchar(100) NOT NULL,
+  `status_terbaca_custumer` varchar(15) NOT NULL,
+  `status_terbaca_photographer` varchar(15) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `list_inbox`
+--
+
+INSERT INTO `list_inbox` (`id_list_inbox`, `custumer`, `photographer`, `status_terbaca_custumer`, `status_terbaca_photographer`) VALUES
+(1, 'firman.akun2@gmail.com', 'dhesyani@gmail.com', 'terbaca', 'terbaca');
 
 -- --------------------------------------------------------
 
@@ -141,7 +188,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`username`, `password`, `nama_lengkap`, `no_hp`, `alamat_lengkap`, `foto`, `facebook`, `twitter`, `instagram`, `level`, `status`) VALUES
 ('admin@admin.com', '25f9e794323b453885f5181f1b624d0b', 'admin', '3443', '343434', 'phographer11.jpg', NULL, NULL, NULL, 1, 'Aktif'),
 ('dhesyani@gmail.com', '25f9e794323b453885f5181f1b624d0b', 'Dhesyani putri', '34431', 'Jl.ikan mainan', 'phographer12.jpg', 'Dhesyani', 'Dhesyani', 'Dhesyani', 2, 'Aktif'),
-('firman.akun2@gmail.com', '25f9e794323b453885f5181f1b624d0b', 'Firman Satriya ', '2345678765', 'aa', 'phographer22.jpg', NULL, NULL, NULL, 3, 'Aktif');
+('firman.akun2@gmail.com', '25f9e794323b453885f5181f1b624d0b', 'Firman Satriya ', '2345678765', 'aa', 'phographer22.jpg', NULL, NULL, NULL, 3, 'Aktif'),
+('firman.akun3@gmail.com', '25f9e794323b453885f5181f1b624d0b', 'Satriya', '34431', 'Jl.ikan mainan', 'phographer12.jpg', 'Dhesyani', 'Dhesyani', 'Dhesyani', 2, 'Aktif');
 
 --
 -- Indexes for dumped tables
@@ -154,10 +202,22 @@ ALTER TABLE `booking`
  ADD PRIMARY KEY (`id_booking`), ADD KEY `booking_ibfk_1` (`username`), ADD KEY `booking_ibfk_2` (`id_paket`);
 
 --
+-- Indexes for table `detail_inbox`
+--
+ALTER TABLE `detail_inbox`
+ ADD PRIMARY KEY (`id_detail_inbox`);
+
+--
 -- Indexes for table `galleri`
 --
 ALTER TABLE `galleri`
  ADD PRIMARY KEY (`id_galleri`), ADD KEY `galleri_ibfk_1` (`username`);
+
+--
+-- Indexes for table `list_inbox`
+--
+ALTER TABLE `list_inbox`
+ ADD PRIMARY KEY (`id_list_inbox`);
 
 --
 -- Indexes for table `paket_foto`
@@ -187,10 +247,20 @@ ALTER TABLE `user`
 ALTER TABLE `booking`
 MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `detail_inbox`
+--
+ALTER TABLE `detail_inbox`
+MODIFY `id_detail_inbox` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `galleri`
 --
 ALTER TABLE `galleri`
-MODIFY `id_galleri` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id_galleri` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `list_inbox`
+--
+ALTER TABLE `list_inbox`
+MODIFY `id_list_inbox` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `paket_foto`
 --

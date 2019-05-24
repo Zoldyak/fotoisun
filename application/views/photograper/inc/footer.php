@@ -55,10 +55,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </div>
 </footer>
 
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" charset="utf-8"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js " charset="utf-8"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" charset="utf-8"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js " charset="utf-8"></script>
+<script src="<?php echo $this->config->item('frontend') ?>/js/jquery.datatable.js"></script>
+
+<script src="<?php echo $this->config->item('frontend') ?>/js/dataTables.bootstrap4.min.js " charset="utf-8"></script>
+<script src="<?php echo $this->config->item('frontend') ?>/js/dataTables.responsive.min.js" charset="utf-8"></script>
+  <script src="<?php echo $this->config->item('frontend') ?>/js/responsive.bootstrap4.min.js " charset="utf-8"></script>
 
 <!-- **** All JS Files ***** -->
 <!-- jQuery 2.2.4 -->
@@ -71,3 +72,82 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="<?php echo $this->config->item('frontend') ?>/js/alime.bundle.js"></script>
 <!-- Active -->
 <script src="<?php echo $this->config->item('frontend') ?>/js/default-assets/active.js"></script>
+
+<script>
+$(document).ready(function() {
+
+  var reload_header= setInterval(function () {
+
+    $.ajax({
+        url: '<?php echo base_url('fotographer/Cp_inbox/cek_inbox/'.$this->session->userdata('User')); ?>',
+
+        success: function(data){
+            // alert(1);
+          $('#inbox').html(data);
+        }
+      });
+    $.ajax({
+      url: '<?php echo base_url('fotographer/Cp_inbox/list_inbox_ajax/'.$this->session->userdata('User')); ?>',
+
+      success: function(inbox_list){
+                $('#list_inbox').html(inbox_list);
+      }
+
+    });
+
+    $('.list-group-item').on('click',function() {
+      var atrribut_list=$(this).attr('data-inbox');
+        $("#form_pesan").remove()
+        var form_kirm=`<div id="form_pesan">
+                  <form method="post" class="mb-15 form_simpan"style="position:relative" action="<?php echo base_url('fotographer/Cp_inbox/balas_pesan/'.$this->session->userdata('User')); ?>">
+                    <div class="form-group col-sm-12">
+                      <input name="pesan" type="hidden" class="form-control idlist"  placeholder="" value=`+atrribut_list+`>
+                      <textarea name="pesan1" class="form-control pesan" rows="2" cols="80"></textarea>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <button type="submit"  class="btn btn-info simpan" id="" placeholder="" value="Kirim">Kirim</button>
+
+                    </div>
+                  </form>
+                </div>`;
+        $("#detail_pesan").after(form_kirm);
+    // alert(atrribut_list);
+    $.ajax({
+      type : 'POST',
+      url:'<?php echo base_url('fotographer/Cp_inbox/detail_inbox_ajax/'.$this->session->userdata('User')); ?>',
+
+      data:{id:atrribut_list},
+      success: function(detail_inbox) {
+        // alert(detail_inbox);
+        $('#detail_pesan').html(detail_inbox)
+        // alert(detail_inbox)
+      }
+    });
+
+    })
+
+  }, 1000);
+
+})
+var clear =setInterval(function () {
+console.clear();
+}, 10000)
+cache.delete('#detail_pesan').then(function(response) {
+    someUIUpdateFunction();
+  });
+  $('.simpan').on('click',function() {
+    alert(1);
+    var id_list=$('.idlist').val();
+    //alert(id_list)
+    var pesan=$('.pesan').val();
+    //var data=$('.form_simpan').serialize();
+    $.ajax({
+      type:'POST',
+      data:{idlist:id_list,pesan:pesan},
+      url:"<?php echo base_url('fotographer/Cp_inbox/balas_pesan/'.$this->session->userdata('User')); ?>",
+      success:function() {
+        alert("Pesan terkirim")
+      }
+    })
+  })
+</script>
