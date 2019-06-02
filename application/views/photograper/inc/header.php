@@ -26,7 +26,7 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul id="nav">
-                                <li class="active"><a href="<?php echo base_url('')?>">Home</a></li>
+                                <li class="active"><a href="<?php echo base_url('fotographer/CP_home/')?>">Home</a></li>
                                 <li><a href="<?php echo base_url('fotographer/CP_gallery/')?>">Gallery</a></li>
                                 <li><a href="<?php echo base_url('fotographer/CP_photographer/')?>">Photographer</a></li>
                                 <?php if ($this->session->userdata('User')!= null){ ?>
@@ -34,7 +34,9 @@
                               <?php } else{?>
 
                             <?php }?>
-                                <li> <a href="#"><?php echo $this->session->userdata('nama_lengkap'); ?> </a>
+                                <li > <a href="#" ><?php echo $this->session->userdata('nama_lengkap'); ?>
+                                  <span id="info_boking"></span>
+                                </a>
                                   <ul class="dropdown">
                                     <li><a href="<?php echo base_url('fotographer/CP_dashbord')?>" class="" >Dashbord</a></li>
                                     <li><a href="<?php echo base_url('CF_login/logout')?>" class="" >Logout</a></li>

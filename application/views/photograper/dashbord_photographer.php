@@ -3,6 +3,56 @@ $user=$detail_data['username'];
 $facebook=$detail_data['facebook'];
 $twitter=$detail_data['twitter'];
 $instagram=$detail_data['instagram'];
+$rating = '
+<i class="fa fa-star-o" aria-hidden="true"></i>
+<i class="fa fa-star-o" aria-hidden="true"></i>
+<i class="fa fa-star-o" aria-hidden="true"></i>
+<i class="fa fa-star-o" aria-hidden="true"></i>
+<i class="fa fa-star-o" aria-hidden="true"></i>';
+foreach ($list_komen as $rowkomen){
+  if ($rowkomen['rata']==1) {
+    $rating = '
+  <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+  <i class="fa fa-star-o" aria-hidden="true"></i>
+  <i class="fa fa-star-o" aria-hidden="true"></i>
+  <i class="fa fa-star-o" aria-hidden="true"></i>
+  <i class="fa fa-star-o" aria-hidden="true"></i>';
+  }
+  elseif ($rowkomen['rata']==2) {
+    $rating = '
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star-o" aria-hidden="true"></i>
+    <i class="fa fa-star-o" aria-hidden="true"></i>
+    <i class="fa fa-star-o" aria-hidden="true"></i>';
+  }
+  elseif ($rowkomen['rata']==3) {
+    $rating = '
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star-o" aria-hidden="true"></i>
+    <i class="fa fa-star-o" aria-hidden="true"></i>';
+  }
+  elseif ($rowkomen['rata']==4) {
+    $rating = '
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star-o" aria-hidden="true"></i>';
+  }
+  elseif ($rowkomen['rata']==5) {
+    $rating = '
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+    <i class="fa fa-star text-yellow" aria-hidden="true"></i>';
+  }
+
+
+}
  ?>
 <section class="breadcrumb-area bg-img bg-overlay jarallax"
 	style="background-image: url(<?php echo $this->config->item('frontend') ?>/img/bg-img/slide1.jpeg);">
@@ -27,63 +77,99 @@ $instagram=$detail_data['instagram'];
 	<div class="container-fluid">
 		<div class="row">
 
-			<div class="col-md-4 scroll-comament border_1px background_grey">
-				<!-- <h5>Testimoni</h5> -->
-				<div class="card">
-					<div class="card-body text-center">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="row">
-									<div class="col-md-4">
-										<i class="fa fa-user fa-3x"></i>
-										<span>tia</span>
-										<span>9/12/2018</span>
-									</div>
-									<div class="col-md-8">
-										<div class="row">
-											<div class="col-md-12 text-left">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</div>
-											<div class="col-md-12 text-left">
-												Good
-											</div>
-										</div>
+      <div class="col-sm-4">
+      <div class="col-md-12 scroll-comament border_1px background_grey  no-padding">
+        <div class="col-sm-12 no-padding">
+          <div class="card">
+            <div class="card-body text-center">
+              <div class="row">
+                <?php $bintang='';
+                if ($jumlah_komen != null) { foreach ($list_komen as $rowkomen):
 
-									</div>
-								</div>
-								<hr>
-							</div>
-							<div class="col-md-12">
-								<div class="row">
-									<div class="col-md-4">
-										<i class="fa fa-user fa-3x"></i>
-										<span>Bagus</span>
-										<span>9/02/2019</span>
-									</div>
-									<div class="col-md-8">
-										<div class="row">
-											<div class="col-md-12 text-left">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</div>
-											<div class="col-md-12 text-left">
-												Good
-											</div>
-										</div>
+                    // code...
 
-									</div>
-								</div>
-								<hr>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+                  if ($rowkomen['rating']==1) {
+                    $bintang = '
+                  <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>';
+                  }
+                  elseif ($rowkomen['rating']==2) {
+                    $bintang = '
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>';
+                  }
+                  elseif ($rowkomen['rating']==3) {
+                    $bintang = '
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>';
+                  }
+                  elseif ($rowkomen['rating']==4) {
+                    $bintang = '
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>';
+                  }
+                  elseif ($rowkomen['rating']==5) {
+                    $bintang = '
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>
+                    <i class="fa fa-star text-yellow" aria-hidden="true"></i>';
+                  }
+
+                  ?>
+
+
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <img class="rounded-circle" src="<?php echo $this->config->item('frontend') ?>/img/foto_profil/<?php echo $rowkomen['foto'] ?>" alt=""
+                        style="width:90px">
+                      <span><?php echo $rowkomen['custumor']; ?></span>
+
+                    </div>
+                    <div class="col-md-8">
+                      <div class="row">
+                        <div class="col-md-12 text-left">
+                        <?php echo $bintang; ?>
+                        <p><?php echo $rowkomen['tanggal_komen']; ?></p>
+                        </div>
+                        <div class="col-md-12 text-left">
+                          <?php echo $rowkomen['komentar']; ?>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              <?php endforeach; } else {?>
+                <div class="col-md-12">
+                  Tidak Ada Komentar
+                  <hr>
+                </div>
+              <?php } ?>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- <h5>Testimoni</h5> -->
+      </div>
+
+      </div>
 			<div class="col-md-4">
 
 				<div class="card bg-light">
@@ -93,16 +179,13 @@ $instagram=$detail_data['instagram'];
 							style="width:90px"><br>
 							<a href="#"  data-toggle="modal" data-target="#editprofil"><i class="fa fa-pencil"></i>edit</a>
 						<p class="font-20 "><?php echo $detail_data['nama_lengkap'] ?></p>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
+            <?php echo   $rating ?>
 						<p class="font-18">photographer profersional</p>
 						<p class="font-14"><?php echo $detail_data['alamat_lengkap'] ?> &nbsp
 							<i class="fa fa-phone"></i><?php echo $detail_data['no_hp'] ?>
 						</p>
 
-              <a href="<?php echo base_url('fotographer/CP_dashbord/daftar_booking/'.$this->session->userdata('nama_lengkap'))?>"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Daftar Booking1</a>
+              <a href="<?php echo base_url('fotographer/CP_dashbord/daftar_booking/'.$this->session->userdata('nama_lengkap'))?>"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Daftar Booking<span id="dashbord_info_boking"></span></a>  
 					</div>
 				</div>
 

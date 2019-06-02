@@ -1,4 +1,32 @@
-<header class="header-area">
+
+<?php
+$this->db->select('*');
+$this->db->join('user', 'user.username = booking.username');
+$this->db->join('paket_foto', 'paket_foto.id_paket = booking.id_paket');
+$this->db->join('transaksi', 'transaksi.id_booking = booking.id_booking', ' left outer');
+$this->db->where('transaksi.status_konfirmasi_transaksi_terbaca_customer', 'belum terbaca');
+$this->db->where('booking.username', $this->session->userdata('User'));
+//$detail=$this->db->get('booking')->row_array();
+$query= $this->db->get('booking')->num_rows();
+ if ($this->session->userdata('User')!= null){ if ($query > 0) {
+   $this->db->select('*');
+   $this->db->join('user', 'user.username = booking.username');
+   $this->db->join('paket_foto', 'paket_foto.id_paket = booking.id_paket');
+   $this->db->join('transaksi', 'transaksi.id_booking = booking.id_booking', ' left outer');
+   $this->db->where('transaksi.status_konfirmasi_transaksi_terbaca_customer', 'belum terbaca');
+   $this->db->where('booking.username', $this->session->userdata('User'));
+   $detail=$this->db->get('booking')->row_array();
+   // $query= $this->db->get('booking')->num_rows();
+   ?>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    window.alert('Transaksi anda sudah di konfirmasi');
+       window.location.href='<?php echo base_url('CF_dashbord/update_status_transaksi/'.$detail['id_booking']) ?>';
+  })
+</script>
+<?php } } ?>
+  <header class="header-area">
     <!-- Main Header Start -->
     <div class="main-header-area">
         <div class="background_transparan classy-nav-container breakpoint-off">
@@ -32,9 +60,9 @@
                                 <?php if ($this->session->userdata('User')!= null){ ?>
                                 <li id="inbox"></li>
                               <?php } else{?>
-                                
+
                             <?php }if ($this->session->userdata('User')!= null){ ?>
-                                  <li> <a href="#"><?php echo $this->session->userdata('User'); ?> </a>
+                                  <li> <a href="#"><?php echo $this->session->userdata('User'); ?><span id="info_persetujuan"></span> </a>
                                     <ul class="dropdown">
                                       <li><a href="<?php echo base_url('CF_dashbord')?>" class="" >Dashbord</a></li>
                                       <li><a href="<?php echo base_url('CF_login/logout')?>" class="" >Logout</a></li>

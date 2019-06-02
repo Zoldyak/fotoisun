@@ -6,7 +6,7 @@ class Cp_inbox extends CI_Controller{
   public function __construct()
   {
     parent::__construct();
-    $this->load->model(array('MP_inbox'));
+    $this->load->model(array('MP_inbox','MP_booking','MP_user'));
     //Codeigniter : Write Less Do More
   }
 
@@ -152,5 +152,14 @@ class Cp_inbox extends CI_Controller{
       }
     }
   }
+  public function info_booking_ajax()
+  {
+    $username=$this->uri->segment(4);
+    //echo $username=$this->uri->segment(4);
+    $list_fotografer=$this->MP_user->detail_fotografer($username)->row_array();
+    $nama_lengkap= $list_fotografer['nama_lengkap'];
+    $countboking=$this->MP_booking->count_boking($nama_lengkap)->num_rows();
+    echo "<span class='badge badge-danger'> ".$countboking."</span>";
 
+  }
 }

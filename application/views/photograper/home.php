@@ -1,9 +1,55 @@
 <section class="our-team-area section-padding-80-50">
   <div class="container">
     <div class="row">
-      
 
-      <?php foreach ($daftar as $row): ?>
+
+      <?php foreach ($daftar as $row):
+        $bintang = '
+      <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+      <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+      <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+      <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+      <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>';
+        if ($row['rating']==1) {
+          $bintang = '
+        <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+        <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+        <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+        <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+        <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>';
+        }
+        elseif ($row['rating']==2) {
+          $bintang = '
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>';
+        }
+        elseif ($row['rating']==3) {
+          $bintang = '
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>';
+        }
+        elseif ($row['rating']==4) {
+          $bintang = '
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>';
+        }
+        elseif ($row['rating']==5) {
+          $bintang = '
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>';
+        }?>
         <!-- start item -->
         <div class="col-sm-3 ">
           <div class="card">
@@ -12,14 +58,10 @@
               <h5 class="card-title"><?php echo $row['nama_lengkap'] ?></h5>
 
                 <ul class="list-inline text-right">
-                  <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
-                  <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
-                  <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
-                  <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
-                  <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                  <?php echo $bintang ?>
                 </ul>
                 <div class="text-right">
-                  <p class="text-red">Photographer</p><a href="#" class="btn btn-primary text-right">Detail</a>
+                  <p class="text-red">Photographer</p><a href="<?php echo base_url('fotographer/CP_photographer/detail/'.$row['username'])?>" class="btn btn-primary text-right">Detail</a>
                 </div>
 
             </div>

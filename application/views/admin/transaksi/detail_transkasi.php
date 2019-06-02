@@ -51,13 +51,19 @@ $this->uri->segment(4);
                      <td><?php echo $row_daftar['jumlah_transaksi']?></td>
 
                      <td>
-                       <?php if ($this->uri->segment(4)=="Transfer"): ?>
+                       <?php if ($this->uri->segment(4)=="Transfer"): if ($row_daftar['status']=='Menunggu Konfirmasi Admin') {?>
+
+
                          <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<?php echo $row_daftar['id_transaksi']?>">
                           Konfirmasi
                         </button>
+                      <?php } else{?>
+                        <button disabled  type="button" class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row_daftar['id_transaksi']?>">
+                         Sudah Dikonfirmasi  </button>
+                    <?php  }?>
                        <?php else: ?>
-                         <button disabled  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<?php echo $row_daftar['id_transaksi']?>">
-                          Konfirmasi
+                         <button disabled  type="button" class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $row_daftar['id_transaksi']?>">
+                          Konfirmasi  </button>
                        <?php endif; ?>
                      </td>
 
@@ -83,12 +89,12 @@ $this->uri->segment(4);
                              <input type="hidden" name="id_transaksi" class="form-control" id="inputEmail3" placeholder="Email" value="<?php echo $row_daftar['id_transaksi']?>">
                            </div>
                          </div>
-                         <div class="form-group row">
+                         <!-- <div class="form-group row">
                            <label for="inputEmail3" class="col-sm-3 control-label">keterangan</label>
                            <div class="col-sm-9">
                               <textarea name="keterangan" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                            </div>
-                         </div>
+                         </div> -->
 
                         </div>
                         <div class="modal-footer">

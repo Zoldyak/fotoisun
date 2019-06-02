@@ -17,7 +17,7 @@ class CF_pesan extends CI_Controller{
     $load=$this->load;
     $i=$this->input;
     $username=$this->uri->segment(3);
-    //echo "saya".$username;
+    // echo "saya".$username;
     $listdata= $this->MF_user->detail_fotografer($username)->row_array();
     $listdatagalleri= $this->MF_user->list_galleri($username)->result_array();
     $listpaket=$this->MF_user->detail_paket($username)->result_array();

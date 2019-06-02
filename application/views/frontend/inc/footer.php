@@ -95,7 +95,14 @@ $(document).ready(function() {
       }
 
     });
+    $.ajax({
+      url: '<?php echo base_url('Cf_inbox/info_persetujuan_ajax/'.$this->session->userdata('User')); ?>',
 
+      success: function(info_persetujuan){
+                $('#info_persetujuan').html(info_persetujuan);
+      }
+
+    });
     $('.list-group-item').on('click',function() {
       var atrribut_list=$(this).attr('data-inbox');
         $("#form_pesan").remove()

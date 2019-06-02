@@ -94,6 +94,15 @@ $(document).ready(function() {
       }
 
     });
+    $.ajax({
+      url: '<?php echo base_url('fotographer/Cp_inbox/info_booking_ajax/'.$this->session->userdata('User')); ?>',
+
+      success: function(boking_list){
+                $('#info_boking').html(boking_list);
+                $('#dashbord_info_boking').html(boking_list);
+      }
+
+    });
 
     $('.list-group-item').on('click',function() {
       var atrribut_list=$(this).attr('data-inbox');

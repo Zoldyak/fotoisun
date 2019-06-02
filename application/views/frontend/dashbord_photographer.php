@@ -36,7 +36,7 @@
                         <th>Lokasi</th>
                         <th>Persetujuan</th>
                         <th>Pembayaran</th>
-                        <th>Keterangan</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -66,7 +66,7 @@
 														<td><a href="#" class="btn btn-danger"> <?php echo $row_daftar['jenis_pembayaran']?></a></td>
                     <?php  } ?>
 
-                      <td><?php echo $row_daftar['keterangan']?></td>
+
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

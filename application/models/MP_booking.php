@@ -15,6 +15,20 @@ class MP_booking extends CI_Model{
     $this->db->where('booking.photograper', $nama);
     return $this->db->get('booking');
   }
+  public function upadate_status_terbaca_booking($nama)
+  {
+    $data = array('status_terbaca_photographer' =>"sudah terbaca" , );
+    $this->db->where('photograper', $nama);
+    $this->db->update('booking', $data);
+  }
+  public function count_boking($username)
+  {
+    $this->db->select('*');
+
+    $this->db->where('photograper', $username);
+    $this->db->where('status_terbaca_photographer', 'belum terbaca');
+    return $this->db->get('booking');
+  }
   function list_transaksi($id_booking){
     $this->db->select('*');
     $this->db->join('transaksi', 'transaksi.id_booking = booking.id_booking');

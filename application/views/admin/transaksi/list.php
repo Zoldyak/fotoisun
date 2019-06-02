@@ -36,6 +36,7 @@
                   <th>Persetujuan</th>
                   <th>Pembayaran</th>
                   <th>Keterangan</th>
+                  <!-- <th>Pembayaran</th> -->
 
                 </tr>
                 </thead>
@@ -66,7 +67,26 @@
 														<td><a href="#" class="btn btn-danger"> <?php echo $row_daftar['jenis_pembayaran']?></a></td>
                     <?php  } ?>
 
-                      <td><?php echo $row_daftar['keterangan']?></td>
+                      <td>
+                        <?php if ($row_daftar['keterangan']=='ada transaksi baru') {?>
+                          <a href="#" class="btn btn-danger">
+                            <?php   echo $row_daftar['keterangan'] ?>
+                          </a>
+                      <?php  }
+                        else{ ?>
+                            <a href="#" class="btn btn-success"> <?php echo $row_daftar['keterangan'] ?> </a>
+                      <?php  }
+                        ?>
+                      </td>
+                      <!-- <td>
+                        <?php if ($row_daftar['status_transaksi_terbaca_admin']==null) {
+                          echo "tidak ada";
+                        } elseif ($row_daftar['status_transaksi_terbaca_admin']=="belum terbaca") {
+                            echo "transaksi Baru";
+                        } elseif ($row_daftar['status_transaksi_terbaca_admin']=="sudah terbaca") {
+                          echo "transaksi sudah terbaca";
+                        }?>
+                      </td> -->
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

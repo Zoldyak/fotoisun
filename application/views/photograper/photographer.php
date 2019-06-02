@@ -48,7 +48,53 @@ cursor: pointer;
 		<div class="list1">
 			<!-- <h2>Our team</h2> -->
 			<div class="loadMore">
-        <?php foreach ($daftar as $row): ?>
+        <?php foreach ($daftar as $row):   $bintang = '
+        <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+        <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+        <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+        <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+        <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>';
+          if ($row['rating']==1) {
+            $bintang = '
+          <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+          <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>';
+          }
+          elseif ($row['rating']==2) {
+            $bintang = '
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>';
+          }
+          elseif ($row['rating']==3) {
+            $bintang = '
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>';
+          }
+          elseif ($row['rating']==4) {
+            $bintang = '
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>';
+          }
+          elseif ($row['rating']==5) {
+            $bintang = '
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>';
+          }?>
+          <a href="<?php echo base_url('fotographer/CP_photographer/detail/'.$row['username'])?>">
           <div class=" item col-md-3" >
             <div class="">
                 <div class="team-content-area text-center mb-30 wow fadeInUp" data-wow-delay="100ms">
@@ -58,11 +104,7 @@ cursor: pointer;
 
                     <h5><?php echo $row['nama_lengkap'] ?></h5>
                     <ul class="list-inline text-right">
-                      <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star text-yellow" aria-hidden="true"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star-half-o text-yellow" aria-hidden="true"></i></li>
-                      <li class="list-inline-item"><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                    <?php echo $bintang ?>
                     </ul>
 
                     <div class="member-social-info">
@@ -74,7 +116,7 @@ cursor: pointer;
 
                 </div>
             </div>
-          </div>
+          </div></a>
         <?php endforeach; ?>
 
 

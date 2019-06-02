@@ -96,7 +96,7 @@
                         <th>status</th>
 
                         <th>jumlah_transfer</th>
-												<th>keterangan</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -108,7 +108,7 @@
                       <td><img src="<?php echo $this->config->item('frontend') ?>/img/transaksi/<?php echo $row_daftar['foto_transaksi']?>" ></td>
                       <td><?php echo $row_daftar['status']?></td>
 											<td><?php echo $row_daftar['jumlah_transaksi']?></td>
-                      <td><?php echo $row_daftar['keterangan']?></td>
+
 
 
                     </tr>
@@ -119,7 +119,7 @@
                   <tr>
                     <th  >Total</th>
                       <th><?php echo $tagihan['harga'] ?></th>
-                    <th  >-</th>
+                    
                     <th  ><?php echo $total_tagihan['jumlah_transaksi'] ?></th></th>
                     <?php
                       if ($total_sisa<=0) {?>

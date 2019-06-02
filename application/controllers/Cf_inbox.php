@@ -6,7 +6,7 @@ class Cf_inbox extends CI_Controller{
   public function __construct()
   {
     parent::__construct();
-    $this->load->model(array('MF_inbox'));
+    $this->load->model(array('MF_inbox','MF_booking'));
     //Codeigniter : Write Less Do More
   }
 
@@ -152,5 +152,15 @@ class Cf_inbox extends CI_Controller{
       }
     }
   }
+  public function info_persetujuan_ajax()
+  {
+    $username=$this->uri->segment(3);
+    //echo $username=$this->uri->segment(3);
 
+    // $list_fotografer=$this->MP_user->detail_fotografer($username)->row_array();
+    // $nama_lengkap= $list_fotografer['nama_lengkap'];
+    $countpersetujuan=$this->MF_booking->count_persetujuan($username)->num_rows();
+    echo "<span class='badge badge-danger'> ".$countpersetujuan."</span>";
+
+  }
 }

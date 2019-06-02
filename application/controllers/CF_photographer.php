@@ -23,16 +23,44 @@ class CF_photographer extends CI_Controller{
     $username=$this->uri->segment(3);
     //echo "saya".$username;
     $listdata= $this->MF_user->detail_fotografer($username)->row_array();
+    // print_r($listdata);
     $listdatagalleri= $this->MF_user->list_galleri($username)->result_array();
     $listpaket=$this->MF_user->detail_paket($username)->result_array();
+    $listkomen=$this->MF_user->list_komentar($username)->result_array();
+    $countkomen=$this->MF_user->count_komen($username)->num_rows();
+    // if(!empty($countkomen)){
+    //     echo "jumlah".$countkomen;
+    // }
+    // else{
+    //     echo "jumlah".$countkomen;
+    // }
+
     // print_r($listpaket);
     $data = array('halaman' => 'detail_photographer.php',
                   'detail_data'=> $listdata,
                   'list_galleri'=>$listdatagalleri,
-                  'list_paket'=> $listpaket
+                  'list_paket'=> $listpaket,
+                  'list_komen'=>$listkomen,
+                  'jumlah_komen'=>$countkomen
                 );
     //$data = array('halaman' => 'detail_photographer.php' );
     $load->view('frontend/layout',$data);
+  }
+  public function komentar()
+  {
+    date_default_timezone_set('Asia/Jakarta');
+    $tanggal=date('Y-m-d H:i:s');
+    $photograp=$this->input->post('photographer');
+    $komen = $this->input->post('komen');
+    $rating= $this->input->post('rating');
+    $customer=$this->session->userdata('User');
+    $dataform = array('komentar' => $komen,
+                      'rating'=>$rating,
+                      'username'=>$customer,
+                      'photographer'=>$photograp,
+                      'tanggal_komen'=>$tanggal);
+    $this->MF_user->insert_komen($dataform);
+    redirect(base_url('CF_photographer/detail/'.$photograp));
   }
 
 }

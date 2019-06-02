@@ -15,6 +15,21 @@ class MF_booking extends CI_Model{
     $this->db->where('booking.username', $username);
     return $this->db->get('booking');
   }
+  public function status_persetujuan_terbaca_oleh_custumor($username)
+  {
+    $data = array('status_persetujuan_terbaca_oleh_custumor' =>"sudah terbaca" , );
+    $this->db->where('username', $username);
+    $this->db->update('booking', $data);
+  }
+  public function count_persetujuan($username)
+  {
+    $this->db->select('*');
+
+    $this->db->where('username', $username);
+    $this->db->where('persetujuan', 'Disetujui');
+    $this->db->where('status_persetujuan_terbaca_oleh_custumor', 'belum terbaca');
+    return $this->db->get('booking');
+  }
   function list_transaksi($id_booking){
     $this->db->select('*');
     $this->db->join('transaksi', 'transaksi.id_booking = booking.id_booking');
@@ -35,6 +50,13 @@ return $this->db->get('transaksi');
   }
   function add_booking($dataform){
     return  $this->db->insert('booking', $dataform);
+  }
+  public function update_booking($id_booking)
+  {
+    // code...
+    $data = array('keterangan' =>"ada transaksi baru" , );
+    $this->db->where('id_booking', $id_booking);
+    $this->db->update('booking', $data);
   }
   function insert_transaksi($dataform){
     return  $this->db->insert('transaksi', $dataform);

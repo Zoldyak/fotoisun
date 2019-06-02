@@ -16,9 +16,21 @@
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()
+
   })
 </script>
 <script>
+$(document).ready(function () {
+  var reload= setInterval(function () {
+    $.ajax({
+        url: '<?php echo base_url("admin/Transaksi/cek_transaksi/") ?>',
+        success: function(List_info_transaksi){
+          // alert(1);
+        $('#info_transaksi').html(List_info_transaksi);
+      }
+    })
+  }, 1000);
+})
   $(function () {
     $('#example1').DataTable()
     $('#example2').DataTable({

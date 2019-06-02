@@ -18,10 +18,15 @@ class CP_dashbord extends CI_Controller{
     $listdata= $this->MP_user->detail_fotografer($username)->row_array();
     $listdatagalleri= $this->MP_user->list_galleri($username)->result_array();
     $listpaket=$this->MP_user->detail_paket($username)->result_array();
+    $listkomen=$this->MP_user->list_komentar($username)->result_array();
+    $countkomen=$this->MP_user->list_komentar($username)->num_rows();
     $data = array('halaman' => 'dashbord_photographer.php',
                   'detail_data'=> $listdata,
                   'list_galleri'=>$listdatagalleri,
-                  'list_paket'=> $listpaket
+                  'list_paket'=> $listpaket,
+                  'list_komen'=>$listkomen,
+                  'jumlah_komen'=>$countkomen
+
                 );
     $load->view('photograper/layout',$data);
   }
@@ -177,6 +182,7 @@ class CP_dashbord extends CI_Controller{
     $load=$this->load;
     $nama=$this->session->userdata('nama_lengkap');
     $listdata= $this->MP_booking->list_booking($nama)->result_array();
+    $upadate_status_terbaca_booking=$this->MP_booking->upadate_status_terbaca_booking($nama);
     // print_r($listdata);
     $data = array('halaman' => 'list_booking.php',
                   'daftar_list'=> $listdata
@@ -190,7 +196,8 @@ class CP_dashbord extends CI_Controller{
     $where = array('id_booking' =>  $i->post('id_booking'), );
     $dataform = array(
                       'persetujuan'=> $i->post('persetujuan'),
-                      'keterangan'=>$i->post('keterangan'),);
+                      'keterangan'=>null,
+                      'status_persetujuan_terbaca_oleh_custumor'=>'belum terbaca',);
                       $this->MP_booking->update_data($where,$dataform);
                         redirect(base_url('fotographer/CP_dashbord/daftar_booking'));
 

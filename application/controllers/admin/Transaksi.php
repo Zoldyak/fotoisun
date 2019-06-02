@@ -33,6 +33,8 @@ class Transaksi extends CI_Controller{
     $jumlah_traksaksi=$this->MA_booking->jumlah_transaksi_tagihan($id_booking)->row_array();
     $listbooking= $this->MA_booking->list_booking($username)->result_array();
     $listdata= $this->MA_booking->list_transaksi($id_booking)->result_array();
+    $this->MA_booking->update_booking($id_booking);
+    $this->MA_booking->update_status_terbaca_admin($id_booking);
     $data=array(
           'halaman' => 'transaksi/detail_transkasi.php',
           'daftar_list'  => $listdata,
@@ -94,7 +96,9 @@ class Transaksi extends CI_Controller{
     $where = array('id_transaksi' =>  $i->post('id_transaksi'), );
     $dataform = array(
                       'status'=> $i->post('status'),
-                      'keterangan'=>$i->post('keterangan'),);
+                      // 'keterangan'=>$i->post('keterangan'),
+                      'status_transaksi_terbaca_admin'=>'sudah terbaca',
+                      'status_konfirmasi_transaksi_terbaca_customer'=>"belum terbaca");
                       $this->MA_booking->update_data($where,$dataform);
                       redirect(base_url('admin/Transaksi/list_booking'));
 
@@ -104,6 +108,16 @@ class Transaksi extends CI_Controller{
     $id=$this->uri->segment(4);
     $this->db->delete('user', array('username' => $id));
     redirect(base_url('admin/User/list_fotografer'));
+  }
+  public function cek_transaksi()
+  {
+
+    // $username=$this->uri->segment(4);
+    //echo $username=$this->uri->segment(4);
+    // $list_fotografer=$this->MP_user->detail_fotografer($username)->row_array();
+    // $nama_lengkap= $list_fotografer['nama_lengkap'];
+    $counttransaksi=$this->MA_booking->count_transaksi()->num_rows();
+    echo "<span class='badge badge-danger'> ".$counttransaksi."</span>";
   }
 
 }

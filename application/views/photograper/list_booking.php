@@ -37,7 +37,7 @@
                         <th>Lokasi</th>
                         <th>Persetujuan</th>
                         <th>Pembayaran</th>
-                        <th>Keterangan</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -73,13 +73,13 @@
 														<td><a href="#" class="btn btn-danger"> <?php echo $row_daftar['jenis_pembayaran']?></a></td>
                     <?php  } ?>
 
-                      <td><?php echo $row_daftar['keterangan']?></td>
+                    
                     </tr>
 										<div class="modal fade" id="exampleModal<?php echo $row_daftar['id_booking']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										  <div class="modal-dialog modal-lg" role="document">
 										    <div class="modal-content">
 										      <div class="modal-header">
-										        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+										        <h5 class="modal-title" id="exampleModalLabel">Persetujuan</h5>
 										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										          <span aria-hidden="true">&times;</span>
 										        </button>

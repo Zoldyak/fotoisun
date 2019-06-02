@@ -16,6 +16,7 @@ class CF_dashbord extends CI_Controller{
     $load=$this->load;
     $username=$this->session->userdata('User');
     $listdata= $this->MF_booking->list_booking($username)->result_array();
+    $upadate_status_persetujuan_terbaca_oleh_custumor=$this->MF_booking->status_persetujuan_terbaca_oleh_custumor($username);
     // print_r($listdata);
     $data = array('halaman' => 'dashbord_photographer.php',
                   'daftar_list'=> $listdata
@@ -65,8 +66,9 @@ class CF_dashbord extends CI_Controller{
                               'id_booking'=>$id_booking,
                               'foto_transaksi'=>$fileFoto1['upload_data']['file_name'],
                               'status'=> "Menunggu Konfirmasi Admin",
-                               'keterangan'=>null);
+                               'keterangan'=>"Ada transaksi Baru");
                               $this->MF_booking->insert_transaksi($dataform);
+                              $this->MF_booking->update_booking($id_booking);
                               redirect(base_url('CF_dashbord'));
           }
 
@@ -79,6 +81,15 @@ class CF_dashbord extends CI_Controller{
                     redirect(base_url('CF_dashbord'));
           }
       }
+  }
+  public function update_status_transaksi()
+  {
+    $id=$this->uri->segment(3);
+    $this->db->set('status_konfirmasi_transaksi_terbaca_customer','sudah terbaca');
+    // $this->db->join('transaksi', 'transaksi.id_booking = booking.id_booking', ' left outer');
+    $this->db->where('id_booking',$id);
+    $this->db->update('transaksi');
+    redirect(base_url('CF_dashbord'));
   }
 
 }

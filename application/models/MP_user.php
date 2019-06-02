@@ -9,9 +9,12 @@ class MP_user extends CI_Model{
     //Codeigniter : Write Less Do More
   }
   function list_fotografer(){
+    $this->db->select('*,avg(rating) as rata,komentar.username as custumor');
+    $this->db->join('user', 'user.username =komentar.photographer','right');
 
-   $query1=$this->db->get_where('user', array('level' => 2));
-   return $query1;
+    $this->db->where('user.level', 2);
+        $this->db->group_by('user.username');
+    return $this->db->get('komentar');
 
   }
    function  list_galleri($username){
@@ -62,5 +65,21 @@ function input_data($dataform){
   function delete_data_paket($id){
     $this->db->where('id_paket', $id);
     $this->db->delete('paket_foto');
+  }
+  public function list_komentar($username)
+  {
+    // code...
+    $this->db->select('*,avg(rating) as rata,komentar.username as custumor');
+       $this->db->join('user', 'user.username =komentar.username','inner');
+    $this->db->where('photographer', $username);
+    return $this->db->get('komentar');
+  }
+  public function count_komen($username)
+  {
+    // code...
+    $this->db->select('*');
+
+    $this->db->where('photographer', $username);
+    return $this->db->get('komentar');
   }
 }

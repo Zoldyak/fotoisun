@@ -37,7 +37,7 @@
           <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
         </ul>
       </li> -->
-      <li><a href="<?php echo base_url('admin/Transaksi/list_booking')?>"><i class="fa fa-book"></i> <span>Transaksi</span></a></li>
+      <li><a href="<?php echo base_url('admin/Transaksi/list_booking')?>"><i class="fa fa-book"></i> Transaksi <span id="info_transaksi"></span> </a></li>
 
       <li class="treeview">
         <a href="#">
