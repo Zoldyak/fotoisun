@@ -61,6 +61,14 @@ function input_data($dataform){
     $this->db->where('photographer', $username);
     return $this->db->get('komentar');
   }
+  public function list_komentar2($username)
+  {
+    // code...
+    $this->db->select('*,komentar.username as custumor');
+       $this->db->join('user', 'user.username =komentar.username','inner');
+    $this->db->where('photographer', $username);
+    return $this->db->get('komentar');
+  }
   public function count_komen($username)
   {
     // code...

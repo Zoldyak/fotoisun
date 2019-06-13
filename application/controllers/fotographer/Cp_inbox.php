@@ -102,6 +102,11 @@ class Cp_inbox extends CI_Controller{
                       'status_pengirim' => 2,
                       'status_terbaca_custumer' => 'new',
                       'status_terbaca_photographer' => 'terbaca');
+    $dataupdate=array('  status_terbaca_custumer'=>'new',
+      'status_terbaca_photographer'=>'terbaca');
+    $this->db->set($dataupdate);
+    $this->db->where('id_list_inbox', $idlist);
+    $this->db->update('list_inbox');
     $res=$this->db->insert('detail_inbox', $dataform);
         redirect(base_url('fotographer/Cp_inbox/list_inbox'));
   }

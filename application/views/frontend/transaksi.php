@@ -62,7 +62,16 @@
       </div>
       <div class="modal-body">
         <form class="" action="<?php echo base_url('CF_dashbord/add_transaksi')?>" method="post"  enctype="multipart/form-data">
-          <div class="form-group row">
+					<div class="form-group row">
+           <label for="inputEmail3" class="col-sm-3 col-form-label">Renkening Penerima</label>
+           <div class="col-sm-9">
+						 <div class="input-group-prepend">
+		          <div class="input-group-text">BCA 072241684 a/n Albertus Yoga Wicaksono</div>
+		        </div>
+             
+           </div>
+         </div>
+					<div class="form-group row">
            <label for="inputEmail3" class="col-sm-3 col-form-label">Jumlah transaksi</label>
            <div class="col-sm-9">
              <input type="text" name="jumlah" class="form-control" id="inputEmail3" placeholder="Email">
@@ -119,7 +128,7 @@
                   <tr>
                     <th  >Total</th>
                       <th><?php echo $tagihan['harga'] ?></th>
-                    
+
                     <th  ><?php echo $total_tagihan['jumlah_transaksi'] ?></th></th>
                     <?php
                       if ($total_sisa<=0) {?>

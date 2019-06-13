@@ -10,7 +10,8 @@ $rating = '
 <i class="fa fa-star-o" aria-hidden="true"></i>
 <i class="fa fa-star-o" aria-hidden="true"></i>';
 foreach ($list_komen as $rowkomen){
-  if ($rowkomen['rata']==1) {
+  echo $rowkomen['rata'];
+  if (round($rowkomen['rata'])==1) {
     $rating = '
   <i class="fa fa-star text-yellow" aria-hidden="true"></i>
   <i class="fa fa-star-o" aria-hidden="true"></i>
@@ -18,7 +19,7 @@ foreach ($list_komen as $rowkomen){
   <i class="fa fa-star-o" aria-hidden="true"></i>
   <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==2) {
+  elseif (round($rowkomen['rata'])==2) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -26,7 +27,7 @@ foreach ($list_komen as $rowkomen){
     <i class="fa fa-star-o" aria-hidden="true"></i>
     <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==3) {
+  elseif (round($rowkomen['rata'])==3) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -34,7 +35,7 @@ foreach ($list_komen as $rowkomen){
     <i class="fa fa-star-o" aria-hidden="true"></i>
     <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==4) {
+  elseif (round($rowkomen['rata'])==4) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -42,7 +43,7 @@ foreach ($list_komen as $rowkomen){
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==5) {
+  elseif (round($rowkomen['rata'])==5) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -83,7 +84,7 @@ foreach ($list_komen as $rowkomen){
             <div class="card-body text-center">
               <div class="row">
                 <?php $bintang='';
-                if ($jumlah_komen != null) { foreach ($list_komen as $rowkomen):
+                if ($jumlah_komen != null) { foreach ($list_komen2 as $rowkomen):
 
                     // code...
 

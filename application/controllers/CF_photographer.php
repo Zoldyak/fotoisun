@@ -27,6 +27,7 @@ class CF_photographer extends CI_Controller{
     $listdatagalleri= $this->MF_user->list_galleri($username)->result_array();
     $listpaket=$this->MF_user->detail_paket($username)->result_array();
     $listkomen=$this->MF_user->list_komentar($username)->result_array();
+    $listkomen2=$this->MF_user->list_komentar2($username)->result_array();
     $countkomen=$this->MF_user->count_komen($username)->num_rows();
     // if(!empty($countkomen)){
     //     echo "jumlah".$countkomen;
@@ -41,6 +42,7 @@ class CF_photographer extends CI_Controller{
                   'list_galleri'=>$listdatagalleri,
                   'list_paket'=> $listpaket,
                   'list_komen'=>$listkomen,
+                  'list_komen2'=>$listkomen2,
                   'jumlah_komen'=>$countkomen
                 );
     //$data = array('halaman' => 'detail_photographer.php' );
