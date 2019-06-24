@@ -29,6 +29,7 @@ class CF_photographer extends CI_Controller{
     $listkomen=$this->MF_user->list_komentar($username)->result_array();
     $listkomen2=$this->MF_user->list_komentar2($username)->result_array();
     $countkomen=$this->MF_user->count_komen($username)->num_rows();
+      $listriwayat=$this->MF_user->list_riwayat($username)->result_array();
     // if(!empty($countkomen)){
     //     echo "jumlah".$countkomen;
     // }
@@ -43,25 +44,46 @@ class CF_photographer extends CI_Controller{
                   'list_paket'=> $listpaket,
                   'list_komen'=>$listkomen,
                   'list_komen2'=>$listkomen2,
-                  'jumlah_komen'=>$countkomen
+                  'jumlah_komen'=>$countkomen,
+                  'list_riwayat'=>$listriwayat
                 );
     //$data = array('halaman' => 'detail_photographer.php' );
     $load->view('frontend/layout',$data);
   }
   public function komentar()
   {
+    $load=$this->load;
     date_default_timezone_set('Asia/Jakarta');
     $tanggal=date('Y-m-d H:i:s');
     $photograp=$this->input->post('photographer');
     $komen = $this->input->post('komen');
     $rating= $this->input->post('rating');
     $customer=$this->session->userdata('User');
-    $dataform = array('komentar' => $komen,
-                      'rating'=>$rating,
-                      'username'=>$customer,
-                      'photographer'=>$photograp,
-                      'tanggal_komen'=>$tanggal);
-    $this->MF_user->insert_komen($dataform);
+    $config['upload_path'] = './assets/frontend/img/komentar';
+    $config['allowed_types'] = 'jpg|png|jpeg|JPEG|JPG|PNG';
+    $config['max_size']  = '3048';
+    $config['remove_space'] = TRUE;
+    $load->library('upload',$config);
+    $this->upload->initialize($config);
+    if ($this->upload->do_upload('foto')) {
+      $fileFoto1 = array('upload_data' => $this->upload->data());
+      $dataform = array('komentar' => $komen,
+                        'rating'=>$rating,
+                        'username'=>$customer,
+                        'photographer'=>$photograp,
+                        'tanggal_komen'=>$tanggal,
+                        'foto_komentar'=>$fileFoto1['upload_data']['file_name']);
+      $this->MF_user->insert_komen($dataform);
+    }
+    else{
+      $dataform = array('komentar' => $komen,
+                        'rating'=>$rating,
+                        'username'=>$customer,
+                        'photographer'=>$photograp,
+                        'tanggal_komen'=>$tanggal);
+      $this->MF_user->insert_komen($dataform);
+    }
+
     redirect(base_url('CF_photographer/detail/'.$photograp));
   }
 

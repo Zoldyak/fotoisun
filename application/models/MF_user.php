@@ -77,4 +77,11 @@ function input_data($dataform){
     $this->db->where('photographer', $username);
     return $this->db->get('komentar');
   }
+  public function list_riwayat($username)
+  {
+    // code...
+    $this->db->select('*');
+    $this->db->where('username', $username);
+    return $this->db->get('riwayat_pekerjaan');
+  }
 }

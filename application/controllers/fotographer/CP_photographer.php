@@ -25,13 +25,17 @@ class CP_photographer extends CI_Controller{
     $listdatagalleri= $this->MP_user->list_galleri($username)->result_array();
     $listpaket=$this->MP_user->detail_paket($username)->result_array();
     $listkomen=$this->MP_user->list_komentar($username)->result_array();
+    $listkomen2=$this->MP_user->list_komentar2($username)->result_array();
     $countkomen=$this->MP_user->count_komen($username)->num_rows();
+      $listriwayat=$this->MP_user->list_riwayat($username)->result_array();
     $data = array('halaman' => 'detail_photographer.php',
                   'detail_data'=> $listdata,
                   'list_galleri'=>$listdatagalleri,
                   'list_paket'=> $listpaket,
                   'list_komen'=>$listkomen,
-                  'jumlah_komen'=>$countkomen
+                  'list_komen2'=>$listkomen2,
+                  'jumlah_komen'=>$countkomen,
+                  'list_riwayat'=>$listriwayat
                 );
     // $data = array('halaman' => 'detail_photographer.php' );
     $load->view('photograper/layout',$data);

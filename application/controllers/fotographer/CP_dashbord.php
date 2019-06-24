@@ -19,13 +19,17 @@ class CP_dashbord extends CI_Controller{
     $listdatagalleri= $this->MP_user->list_galleri($username)->result_array();
     $listpaket=$this->MP_user->detail_paket($username)->result_array();
     $listkomen=$this->MP_user->list_komentar($username)->result_array();
+    $listkomen2=$this->MP_user->list_komentar2($username)->result_array();
     $countkomen=$this->MP_user->list_komentar($username)->num_rows();
+    $listriwayat=$this->MP_user->list_riwayat($username)->result_array();
     $data = array('halaman' => 'dashbord_photographer.php',
                   'detail_data'=> $listdata,
                   'list_galleri'=>$listdatagalleri,
                   'list_paket'=> $listpaket,
                   'list_komen'=>$listkomen,
-                  'jumlah_komen'=>$countkomen
+                  'list_komen2'=>$listkomen2,
+                  'jumlah_komen'=>$countkomen,
+                  'list_riwayat'=>$listriwayat
 
                 );
     $load->view('photograper/layout',$data);
@@ -260,5 +264,57 @@ class CP_dashbord extends CI_Controller{
                     redirect(base_url('fotographer/CP_dashbord'));
           }
       }
+  }
+  public function form_tambah_riwayat()
+  {
+    $username=$this->session->userdata('User');
+    $load=$this->load;
+    $i=$this->input;
+    $valid 		= $this->form_validation;
+    $valid->set_rules('riwayat','riwayat','required');
+    if ($valid->run() != false) {
+        $dataform = array('username' => $username,
+        'nama_pekerjaan' => $i->post('riwayat'),
+                      );
+                      $this->MP_user->insert_riwayat($dataform);
+                      redirect(base_url('fotographer/CP_dashbord'));
+    }
+
+
+    $data = array('halaman' => 'form_riwayat.php',
+                  'jenis_form'=>'tambah'
+                );
+                // print_r($detai_list);
+     $load->view('photograper/layout',$data);
+  }
+  public function form_edit_riwayat()
+  {
+    $id =$this->uri->segment(4);
+    $load=$this->load;
+    $i=$this->input;
+    $valid 		= $this->form_validation;
+    $valid->set_rules('riwayat','riwayat','required');
+    if ($valid->run() != false) {
+        $where = array('id_riwayat_pekerjaan' => $i->post('id_detail'), );
+        $dataform = array('nama_pekerjaan' => $i->post('riwayat'),
+                      );
+                      $this->MP_user->update_riwayat($where,$dataform);
+                      redirect(base_url('fotographer/CP_dashbord'));
+    }
+    $detai_list=$this->MP_user->list_detail_riwayat($id)->row_array();
+
+    $data = array('halaman' => 'form_riwayat.php',
+                  'daftar_list'=> $detai_list,
+                  'jenis_form'=>'edit'
+                );
+                // print_r($detai_list);
+     $load->view('photograper/layout',$data);
+  }
+  public function form_delete_riwayat()
+  {
+    $id =$this->uri->segment(4);
+      $this->db->delete('riwayat_pekerjaan', array('id_riwayat_pekerjaan' => $id));
+      redirect(base_url('fotographer/CP_dashbord'));
+    // code...
   }
 }

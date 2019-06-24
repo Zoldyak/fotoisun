@@ -11,7 +11,7 @@ $rating = '
 <i class="fa fa-star-o" aria-hidden="true"></i>
 <i class="fa fa-star-o" aria-hidden="true"></i>';
 foreach ($list_komen as $rowkomen){
-  if ($rowkomen['rata']==1) {
+  if (round($rowkomen['rata'])==1) {
     $rating = '
   <i class="fa fa-star text-yellow" aria-hidden="true"></i>
   <i class="fa fa-star-o" aria-hidden="true"></i>
@@ -19,7 +19,7 @@ foreach ($list_komen as $rowkomen){
   <i class="fa fa-star-o" aria-hidden="true"></i>
   <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==2) {
+  elseif (round($rowkomen['rata'])==2) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -27,7 +27,7 @@ foreach ($list_komen as $rowkomen){
     <i class="fa fa-star-o" aria-hidden="true"></i>
     <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==3) {
+  elseif (round($rowkomen['rata'])==3) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -35,7 +35,7 @@ foreach ($list_komen as $rowkomen){
     <i class="fa fa-star-o" aria-hidden="true"></i>
     <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==4) {
+  elseif (round($rowkomen['rata'])==4) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -43,7 +43,7 @@ foreach ($list_komen as $rowkomen){
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==5) {
+  elseif (round($rowkomen['rata'])==5) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -85,7 +85,7 @@ foreach ($list_komen as $rowkomen){
             <div class="card-body text-center">
               <div class="row">
                 <?php $bintang='';
-                if ($jumlah_komen != null) { foreach ($list_komen as $rowkomen):
+                if ($jumlah_komen != null) { foreach ($list_komen2 as $rowkomen):
 
                     // code...
 
@@ -147,9 +147,17 @@ foreach ($list_komen as $rowkomen){
                         <?php echo $bintang; ?>
                         <p><?php echo $rowkomen['tanggal_komen']; ?></p>
                         </div>
+                        <?php if ( $rowkomen['foto_komentar']==null) {?>
+                          <div class="col-md-12 text-left">
+                            <?php echo $rowkomen['komentar']; ?>
+                          </div>
+                      <?php  } else{?>
                         <div class="col-md-12 text-left">
-                          <?php echo $rowkomen['komentar']; ?>
+                          <?php echo $rowkomen['komentar']; ?> <br>
+                          <img class="rounded" src="<?php echo $this->config->item('frontend') ?>/img/komentar/<?php echo $rowkomen['foto_komentar'] ?>" alt=""
+                            style="width:90px">
                         </div>
+                    <?php  }?>
                       </div>
 
                     </div>
@@ -187,7 +195,8 @@ foreach ($list_komen as $rowkomen){
 						</p>
 
               <a href="<?php echo base_url('fotographer/CP_dashbord/daftar_booking/'.$this->session->userdata('nama_lengkap'))?>"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Daftar Booking<span id="dashbord_info_boking"></span></a>
-					</div>
+              <a href="#"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#riwayat"><i class="fa fa-plus"></i>Riwayat Pekerjaan</a>
+          </div>
 				</div>
 
 			</div>
@@ -653,4 +662,59 @@ foreach ($list_komen as $rowkomen){
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="riwayat" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="">Riwayat</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <a href="<?php echo base_url('fotographer/CP_dashbord/form_tambah_riwayat/')?>"  class="btn btn-primary btn-sm" d><i class="fa fa-plus"></i></a>
+          <table id="example" class="table table-striped table-bordered" style="width:100%">
+                  <thead>
+                      <tr>
+                          <th>No</th>
+                          <th>Riwayat</th>
+                          <th>Opsi</th>
+
+
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <?php $no=0;
+                    foreach ($list_riwayat as $row_riwayat):
+                      $no++?>
+                      <tr>
+                        <td><?php echo $no; ?></td>
+                        <td><?php echo $row_riwayat['nama_pekerjaan']; ?></td>
+                        <td>
+  <a href="<?php echo base_url('fotographer/CP_dashbord/form_edit_riwayat/'. $row_riwayat['id_riwayat_pekerjaan'])?>"  class="btn btn-primary btn-sm" d><i class="fa fa-pencil"></i></a>
+  <a href="<?php echo base_url('fotographer/CP_dashbord/form_delete_riwayat/'. $row_riwayat['id_riwayat_pekerjaan'])?>"  class="btn btn-danger btn-sm" d><i class="fa fa-trash"></i></a>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+              </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary " data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<script>
+$(document).ready(function() {
+  $('#example').DataTable({
+     responsive: true
+  });
+  $('#pemberitahuan').on('click',function(){
+     alert("Menunggu persetujuan");
+  });
+
+} );
+</script>

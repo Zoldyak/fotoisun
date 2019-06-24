@@ -68,7 +68,7 @@
 						 <div class="input-group-prepend">
 		          <div class="input-group-text">BCA 072241684 a/n Albertus Yoga Wicaksono</div>
 		        </div>
-             
+
            </div>
          </div>
 					<div class="form-group row">

@@ -3,14 +3,10 @@ $user=$detail_data['username'];
 $facebook=$detail_data['facebook'];
 $twitter=$detail_data['twitter'];
 $instagram=$detail_data['instagram'];
-$rating = '
-<i class="fa fa-star-o" aria-hidden="true"></i>
-<i class="fa fa-star-o" aria-hidden="true"></i>
-<i class="fa fa-star-o" aria-hidden="true"></i>
-<i class="fa fa-star-o" aria-hidden="true"></i>
-<i class="fa fa-star-o" aria-hidden="true"></i>';
+
 foreach ($list_komen as $rowkomen){
-  if ($rowkomen['rata']==1) {
+  echo round($rowkomen['rata']);
+  if (round($rowkomen['rata'])==1) {
     $rating = '
   <i class="fa fa-star text-yellow" aria-hidden="true"></i>
   <i class="fa fa-star-o" aria-hidden="true"></i>
@@ -18,7 +14,7 @@ foreach ($list_komen as $rowkomen){
   <i class="fa fa-star-o" aria-hidden="true"></i>
   <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==2) {
+  elseif (round($rowkomen['rata'])==2) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -26,7 +22,7 @@ foreach ($list_komen as $rowkomen){
     <i class="fa fa-star-o" aria-hidden="true"></i>
     <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==3) {
+  elseif (round($rowkomen['rata'])==3) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -34,7 +30,7 @@ foreach ($list_komen as $rowkomen){
     <i class="fa fa-star-o" aria-hidden="true"></i>
     <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==4) {
+  elseif (round($rowkomen['rata'])==4) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -42,7 +38,7 @@ foreach ($list_komen as $rowkomen){
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star-o" aria-hidden="true"></i>';
   }
-  elseif ($rowkomen['rata']==5) {
+  elseif (round($rowkomen['rata'])==5) {
     $rating = '
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
     <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -83,7 +79,7 @@ foreach ($list_komen as $rowkomen){
             <div class="card-body text-center">
               <div class="row">
                 <?php $bintang='';
-                if ($jumlah_komen != null) { foreach ($list_komen as $rowkomen):
+                if ($jumlah_komen != null) { foreach ($list_komen2 as $rowkomen):
 
                     // code...
 
@@ -148,6 +144,17 @@ foreach ($list_komen as $rowkomen){
                         <div class="col-md-12 text-left">
                           <?php echo $rowkomen['komentar']; ?>
                         </div>
+                        <?php if ( $rowkomen['foto_komentar']==null) {?>
+                          <div class="col-md-12 text-left">
+                            <?php echo $rowkomen['komentar']; ?>
+                          </div>
+                      <?php  } else{?>
+                        <div class="col-md-12 text-left">
+                          <?php echo $rowkomen['komentar']; ?> <br>
+                          <img class="rounded" src="<?php echo $this->config->item('frontend') ?>/img/komentar/<?php echo $rowkomen['foto_komentar'] ?>" alt=""
+                            style="width:90px">
+                        </div>
+                    <?php  }?>
                       </div>
 
                     </div>
@@ -183,6 +190,7 @@ foreach ($list_komen as $rowkomen){
 						<p class="font-14"><?php echo $detail_data['alamat_lengkap'] ?> &nbsp
 							<i class="fa fa-phone"></i><?php echo $detail_data['no_hp'] ?>
 						</p>
+            <a href="#"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#riwayat"><i class="fa fa-plus"></i>Riwayat Pekerjaan</a>
 					</div>
 				</div>
 
@@ -348,13 +356,50 @@ foreach ($list_komen as $rowkomen){
 	      </div>
 	    </div>
 	  </div>
+    <div class="modal fade" id="riwayat" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="">Riwayat</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
 
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Riwayat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <?php $no=0;
+                      foreach ($list_riwayat as $row_riwayat):
+                        $no++?>
+                        <tr>
+                          <td><?php echo $no; ?></td>
+                          <td><?php echo $row_riwayat['nama_pekerjaan']; ?></td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary " data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
 
 	</div>
 <script>
 $(document).ready(function(){
   $('#notif_login').on('click',function(){
      alert("Anda Harus login Terlebih Dahulu");
+  });
+  $('#example').DataTable({
+     responsive: true
   });
 });
 

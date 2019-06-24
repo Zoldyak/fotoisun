@@ -10,7 +10,7 @@ $rating = '
 <i class="fa fa-star-o" aria-hidden="true"></i>
 <i class="fa fa-star-o" aria-hidden="true"></i>';
 foreach ($list_komen as $rowkomen){
-  echo $rowkomen['rata'];
+  // echo $rowkomen['rata'];
   if (round($rowkomen['rata'])==1) {
     $rating = '
   <i class="fa fa-star text-yellow" aria-hidden="true"></i>
@@ -146,9 +146,18 @@ foreach ($list_komen as $rowkomen){
                         <?php echo $bintang; ?>
                         <p><?php echo $rowkomen['tanggal_komen']; ?></p>
                         </div>
+                        <?php if ( $rowkomen['foto_komentar']==null) {?>
+                          <div class="col-md-12 text-left">
+                            <?php echo $rowkomen['komentar']; ?>
+                          </div>
+                      <?php  } else{?>
                         <div class="col-md-12 text-left">
-                          <?php echo $rowkomen['komentar']; ?>
+                          <?php echo $rowkomen['komentar']; ?> <br>
+                          <img class="rounded" src="<?php echo $this->config->item('frontend') ?>/img/komentar/<?php echo $rowkomen['foto_komentar'] ?>" alt=""
+                            style="width:90px">
                         </div>
+                    <?php  }?>
+
                       </div>
 
                     </div>
@@ -172,11 +181,15 @@ foreach ($list_komen as $rowkomen){
 
 
       <div class="col-sm-1-12">
-        <form class="" action="<?php echo base_url('CF_photographer/komentar')?>" method="post">
+        <form class="" action="<?php echo base_url('CF_photographer/komentar')?>" method="post"  enctype="multipart/form-data">
           <input type="hidden" name="photographer" value="<?php echo $this->uri->segment(3); ?>">
           <div class="form-group">
             <label for=""></label>
             <textarea name="komen" rows="2" cols="80" class="form-control" placeholder="Komentar"></textarea>
+          </div>
+          <div class="form-group">
+            <label for=""></label>
+              <input type="file" class="form-control" placeholder="" name="foto">
           </div>
           <div class="form-group">
             <label for=""></label>
@@ -190,6 +203,7 @@ foreach ($list_komen as $rowkomen){
           </fieldset><button class="btn btn-primary" type="submit"  name="button">Kirim</button>
 
           </div>
+
         </form>
       </div>
         <?php endif; ?>
@@ -255,7 +269,7 @@ foreach ($list_komen as $rowkomen){
             <a href="#"  class="btn btn-primary btn-sm" id="notif_login"><i class="fa fa-plus"></i>Booking</a>
 
           <?php  } ?>
-
+  <a href="#"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#riwayat"><i class="fa fa-plus"></i>Riwayat Pekerjaan</a>
 					</div>
 				</div>
 
@@ -422,13 +436,50 @@ foreach ($list_komen as $rowkomen){
 	    </div>
 	  </div>
 
+    <div class="modal fade" id="riwayat" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="">Riwayat</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
 
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Riwayat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <?php $no=0;
+                      foreach ($list_riwayat as $row_riwayat):
+                        $no++?>
+                        <tr>
+                          <td><?php echo $no; ?></td>
+                          <td><?php echo $row_riwayat['nama_pekerjaan']; ?></td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary " data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
 	</div>
 <script>
 $(document).ready(function(){
   $('#notif_login').on('click',function(){
      alert("Anda Harus login Terlebih Dahulu");
-  });
+  })
+  $('#example').DataTable({
+     responsive: true
+  });;
 });
 
 </script>
