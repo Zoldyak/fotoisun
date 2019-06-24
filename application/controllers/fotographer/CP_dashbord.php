@@ -120,14 +120,14 @@ class CP_dashbord extends CI_Controller{
   function add_paket(){
     $load=$this->load;
     $i=$this->input;
-
+    $user=$this->session->userdata('User');
     $valid 		= $this->form_validation;
     $valid->set_rules('nama_paket','nama_paket','required');
     $valid->set_rules('harga','harga','required');
     //$valid->set_rules('jenis_foto','jenis_foto','required');
     // $valid->set_rules('foto','foto','required');
       if ($valid->run() != false) {
-        $dataform = array('username' =>$i->post('user') ,
+        $dataform = array('username' =>$user ,
                           'nama_paket'=>$i->post('nama_paket'),
                           'harga' =>$i->post('harga')
                         );

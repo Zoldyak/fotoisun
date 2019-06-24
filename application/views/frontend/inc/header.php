@@ -57,6 +57,12 @@ $query= $this->db->get('booking')->num_rows();
                                 <li class="active"><a href="<?php echo base_url('')?>">Home</a></li>
                                 <li><a href="<?php echo base_url('CF_gallery/')?>">Gallery</a></li>
                                 <li><a href="<?php echo base_url('CF_photographer/')?>">Photographer</a></li>
+                                <li><a href="#">About</a>
+                                  <ul class="dropdown">
+                                    <li><a href="<?php echo base_url('CF_kegiatan/')?>">Kegiatan</a></li>
+                                    <li><a href="<?php echo base_url('CF_jadwal/')?>">Jadwal</a></li>
+                                  </ul>
+                                </li>
                                 <?php if ($this->session->userdata('User')!= null){ ?>
                                 <li id="inbox"></li>
                               <?php } else{?>
@@ -75,6 +81,7 @@ $query= $this->db->get('booking')->num_rows();
 
                                 <li><a href="#" class="" data-toggle="modal" data-target="#myModal">Login</a></li>
                               <?php } ?>
+
                             </ul>
                             <div class="modal fade" id="myModal">
                               <div class="modal-dialog modal-lg">

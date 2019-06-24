@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?php echo $this->config->item('admin') ?>/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo $this->config->item('admin') ?>/css/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="<?php echo $this->config->item('admin') ?>/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->

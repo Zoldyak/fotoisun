@@ -1,5 +1,6 @@
 <?php
-$user=$detail_data['username'];
+$user=$this->session->userdata('User');
+// echo "nama saya".$user;
 $facebook=$detail_data['facebook'];
 $twitter=$detail_data['twitter'];
 $instagram=$detail_data['instagram'];
@@ -185,7 +186,7 @@ foreach ($list_komen as $rowkomen){
 							<i class="fa fa-phone"></i><?php echo $detail_data['no_hp'] ?>
 						</p>
 
-              <a href="<?php echo base_url('fotographer/CP_dashbord/daftar_booking/'.$this->session->userdata('nama_lengkap'))?>"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Daftar Booking<span id="dashbord_info_boking"></span></a>  
+              <a href="<?php echo base_url('fotographer/CP_dashbord/daftar_booking/'.$this->session->userdata('nama_lengkap'))?>"  class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Daftar Booking<span id="dashbord_info_boking"></span></a>
 					</div>
 				</div>
 
@@ -231,7 +232,7 @@ foreach ($list_komen as $rowkomen){
                           <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 control-label">Harga</label>
                             <div class="col-sm-10">
-                              <input type="hidden" name="user" value="<?php echo $user ?>">
+                              <input type="hidden" name="user" value="<?php echo $this->session->userdata('User') ?>">
                               <input type="Text" class="form-control" id="inputEmail3" placeholder="Harga Paket" name="harga" value="<?php echo $row_paket['harga'] ?>">
                             </div>
                           </div>
@@ -628,7 +629,7 @@ foreach ($list_komen as $rowkomen){
             <div class="form-group row">
               <label for="inputEmail3" class="col-sm-2 control-label">Nama Paket</label>
               <div class="col-sm-10">
-                <input type="hidden" name="user" value="<?php echo $user ?>">
+                <input type="hidden" name="user" value="<?php echo $this->session->userdata('User') ?>">
                 <input type="Text" class="form-control" id="inputEmail3" placeholder="Nama Paket" name="nama_paket" value="">
               </div>
             </div>

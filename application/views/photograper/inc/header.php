@@ -34,6 +34,12 @@
                               <?php } else{?>
 
                             <?php }?>
+                            <li><a href="#">About</a>
+                              <ul class="dropdown">
+                                <li><a href="<?php echo base_url('fotographer/CP_kegiatan/')?>">Kegiatan</a></li>
+                                <li><a href="<?php echo base_url('fotographer/CP_jadwal/')?>">Jadwal</a></li>
+                              </ul>
+                            </li>
                                 <li > <a href="#" ><?php echo $this->session->userdata('nama_lengkap'); ?>
                                   <span id="info_boking"></span>
                                 </a>

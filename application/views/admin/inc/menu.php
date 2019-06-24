@@ -50,6 +50,17 @@
           <li><a href="<?php echo base_url('admin/User/list_customer')?>"><i class="fa fa-circle-o"></i> Customer</a></li>
         </ul>
       </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa  fa-list-alt"></i>
+          <span>about</span>
+
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="<?php echo base_url('admin/Jadwal')?>"><i class="fa fa-list-alt"></i> jadwal</a></li>
+          <li><a href="<?php echo base_url('admin/Kegiatan')?>"><i class="fa fa-list-alt"></i> kegiatan</a></li>
+        </ul>
+      </li>
       <!-- <li>
         <a href="../widgets.html">
           <i class="fa fa-th"></i> <span>Widgets</span>

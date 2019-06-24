@@ -2352,6 +2352,10 @@ input:required {
 	border-right: 1px solid #dddddd;
 }
 
+.border_radius_7px {
+	border-radius: 7px;
+}
+
 .modal-backdrop.show {
 	display: none;
 }

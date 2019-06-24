@@ -10,6 +10,7 @@
 <script src="<?php echo $this->config->item('admin') ?>/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo $this->config->item('admin') ?>/js/demo.js"></script>
+<script src="<?php echo $this->config->item('admin') ?>/css/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
 <script src="<?php echo $this->config->item('admin') ?>/css/datatables.net-bs/js/dataTables.bootstrap.js"></script>
 <script src="<?php echo $this->config->item('admin') ?>/css/datatables.net/js/jquery.dataTables.min.js"></script>
