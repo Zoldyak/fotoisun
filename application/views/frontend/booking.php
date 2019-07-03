@@ -39,13 +39,16 @@ $userbooking= $this->session->userdata('User');
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Paket Foto</label>
             <div class="col-sm-10">
-              <select  class="form-control" name="paket_foto">
+              <select  class="form-control" name="paket_foto" id="pilihpaket">
+                <option value="" selected disabled>Pilih paket</option>
                 <?php foreach ($list_paket as $row_paket): ?>
                   <option value="<?php  echo $row_paket['id_paket']?>"><?php echo $row_paket['nama_paket']." Rp.".$row_paket['harga']; ?></option>
                 <?php endforeach; ?>
               </select>
-
             </div>
+          </div>
+          <div class="" id="isidetail">
+
           </div>
           <div class="form-group">
             <label for="example-date-input" class="col-2 control-label">Tanggal Booking</label>
@@ -70,6 +73,7 @@ $userbooking= $this->session->userdata('User');
                 <option value="Transfer">Transfer</option>
               </select>
             </div>
+
           </div>
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Lokasi Foto</label>
@@ -113,4 +117,21 @@ $userbooking= $this->session->userdata('User');
     }
   }
 
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#pilihpaket').on('change',function() {
+        var id= $( this ).val();
+        $.ajax({
+          url: '<?php echo base_url('CF_pesan/ajax_detail')?>',
+          data: {'id':id },
+          type: "POST",
+         success: function(data) {
+             alert(id)
+            $('#isidetail').html(data);
+         }
+        })
+
+      })
+    })
 </script>

@@ -215,6 +215,7 @@ foreach ($list_komen as $rowkomen){
           <?php foreach ($list_paket as $row_paket): ?>
               <li class="list-group-item list-group-item-default font-wight700 font-12 ">
                 <div class="float-md-left"><?php echo $row_paket['nama_paket'] ?></div>
+                  <div class="float-md-left">&nbsp<?php echo $row_paket['detail_paket'] ?></div>
                 <div class="float-md-right"><?php echo $row_paket['harga'] ?>
                   <a href="#"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editpaket<?php echo $row_paket['id_paket'] ?>"><i class="fa fa-pencil"></i></a>
                     <a href="<?php echo base_url('fotographer/CP_dashbord/delete_paket/'.$row_paket['id_paket'])?>"  class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i></a>
@@ -238,6 +239,14 @@ foreach ($list_komen as $rowkomen){
                               <input type="Text" class="form-control" id="inputEmail3" placeholder="Nama Paket" name="nama_paket" value="<?php echo $row_paket['nama_paket'] ?>">
                             </div>
                           </div>
+                          <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Detail Paket</label>
+                            <div class="col-sm-10">
+                              <textarea name="detail" rows="8" cols="80" class="form-control"><?php echo $row_paket['detail_paket'] ?></textarea>
+
+                            </div>
+                          </div>
+
                           <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 control-label">Harga</label>
                             <div class="col-sm-10">
@@ -640,6 +649,13 @@ foreach ($list_komen as $rowkomen){
               <div class="col-sm-10">
                 <input type="hidden" name="user" value="<?php echo $this->session->userdata('User') ?>">
                 <input type="Text" class="form-control" id="inputEmail3" placeholder="Nama Paket" name="nama_paket" value="">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 control-label">Detail Paket</label>
+              <div class="col-sm-10">
+                <textarea name="detail" rows="8" cols="80" class="form-control"></textarea>
+
               </div>
             </div>
             <div class="form-group row">

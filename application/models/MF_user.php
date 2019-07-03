@@ -42,6 +42,15 @@ class MF_user extends CI_Model{
   // /return $query1;
 
  }
+ function ajax_detail_paket($idpaket){
+   $this->db->select('*');
+   $this->db->where('id_paket', $idpaket);
+  //$query1=$this->db->get_where('user', array('username' => $username));
+  return $this->db->get('paket_foto');
+  // /return $query1;
+
+ }
+
 function input_data($dataform){
     $this->db->insert('user',$dataform);
       }

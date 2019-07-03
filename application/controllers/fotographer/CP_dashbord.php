@@ -133,6 +133,7 @@ class CP_dashbord extends CI_Controller{
       if ($valid->run() != false) {
         $dataform = array('username' =>$user ,
                           'nama_paket'=>$i->post('nama_paket'),
+                          'detail_paket'=>$i->post('detail'),
                           'harga' =>$i->post('harga')
                         );
           $this->MP_user->insert_data_paket($dataform);
@@ -160,6 +161,7 @@ class CP_dashbord extends CI_Controller{
       if ($valid->run() != false) {
         $where = array('id_paket' => $i->post('id_paket'), );
         $dataform = array('nama_paket'=>$i->post('nama_paket'),
+                          'detail_paket'=>$i->post('detail'),
                           'harga' =>$i->post('harga')
                         );
           $this->MP_user->update_data_paket($where,$dataform);

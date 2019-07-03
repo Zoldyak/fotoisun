@@ -61,5 +61,19 @@ class CF_pesan extends CI_Controller{
     }
 
   }
+  public function ajax_detail()
+  {
+    $idpaket=$this->input->post('id');
+      $listpaket=$this->MF_user->ajax_detail_paket($idpaket)->row_array();
+    echo '
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label">detail Foto</label>
+      <div class="col-sm-10">
+<textarea name="name" rows="8" cols="80" class="form-control" readonly>'.$listpaket["detail_paket"].'</textarea>;
+      </div>
+    </div>';
+
+
+  }
 
 }
