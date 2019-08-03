@@ -1,3 +1,6 @@
+<?php
+date_default_timezone_set('Asia/Jakarta');
+ ?>
 <header class="header-area">
     <!-- Main Header Start -->
     <div class="main-header-area">

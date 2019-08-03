@@ -32,7 +32,7 @@
 
 
             <?php
-            $total_sisa=$tagihan['harga']- $total_tagihan['jumlah_transaksi'];
+            $total_sisa=$tagihan['total_harga']- $total_tagihan['jumlah_transaksi'];
             if ($this->uri->segment(4)=="COD") {
               // code...
 
@@ -118,7 +118,7 @@
                 <tfoot>
                   <tr>
                     <th  >Total</th>
-                      <th><?php echo $tagihan['harga'] ?></th>
+                      <th><?php echo nominal($tagihan['total_harga']) ?></th>
                     <th  >-</th>
                     <th  ><?php echo $total_tagihan['jumlah_transaksi'] ?></th></th>
                     <?php
@@ -131,7 +131,7 @@
                     ?>
                     <th><button type="button" class="btn btn-danger">
                       <?php
-                      echo "Sisa:".$total_sisa ?>
+                      echo "Sisa:".nominal($total_sisa) ?>
                     </button>
                       </th><?php } ?>
                   </tr>

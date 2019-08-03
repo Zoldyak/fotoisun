@@ -18,30 +18,36 @@
 <section class="">
   <div class="row">
     <div class="col-md-3">
+      <form class="form-horizontal"  action="<?php echo base_url('CF_gallery/')?> " method="post" enctype="multipart/form-data">
       <ul class="list-group list-group-flush">
           <li class="list-group-item font-wight700">Filter</li>
           <li class="list-group-item">
             <div class="form-group">
             <label for="exampleFormControlSelect1">Kategori</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>Pantai</option>
-              <option>Gunung</option>
-              <option>Kota</option>
+            <input type="hidden" name="tipe" value="1">
+            <select class="form-control" id="exampleFormControlSelect1" name="kategori" required>
+              <option value="" disabled selected>Pilih</option>
+              <option value="Pantai">Pantai</option>
+              <option value="Gunung">Gunung</option>
+              <option value="Kota">Kota</option>
             </select>
           </div>
           </li>
           <li class="list-group-item"><div class="form-group">
           <label for="exampleFormControlSelect1">Jenis Foto</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>Wedding</option>
-            <option>Pre-wedding</option>
+          <select class="form-control" id="exampleFormControlSelect1" name="jenis" required>
+            <option value="" disabled selected>Pilih</option>
+            <option value="Wedding">Wedding</option>
+            <option value="Pre-wedding">Pre-wedding</option>
+            <option value="Anak">Anak-anak</option>
           </select>
         </div></li>
-          <li class="list-group-item text-right"><button type="button" class="btn btn-danger">
+          <li class="list-group-item text-right"><button type="submit" class="btn btn-danger">
             <i class="fa fa-search"></i>kirim
           </button></li>
 
         </ul>
+      </form>
     </div>
     <div class="col-md-9">
       <div class="row">
@@ -49,9 +55,10 @@
           <nav aria-label="breadcrumb ">
             <ol class="breadcrumb  mt-15">
               <li class="breadcrumb-item active" aria-current="page">
-                <form class="form-inline ">
+                <form class="form-inline"  action="<?php echo base_url('CF_gallery/')?> " method="post" enctype="multipart/form-data">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="inputPassword2" placeholder="Nama lokasi">
+                    <input type="hidden" name="tipe" value="2">
+                    <input type="text" name="lokasi" class="form-control" id="inputPassword2" placeholder="Nama lokasi" required>
                   </div> &nbsp
                   <button type="submit" class="btn btn-primary  "><i class="fa fa-search"></i></button>
                 </form>

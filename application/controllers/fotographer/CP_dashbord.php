@@ -211,6 +211,7 @@ class CP_dashbord extends CI_Controller{
 
   function transaksi()
   {
+    date_default_timezone_set('Asia/Jakarta');
     $tanggal=date('Y-m-d');
     $id_booking=$this->uri->segment(5);
     $load=$this->load;

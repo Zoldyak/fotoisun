@@ -2339,6 +2339,11 @@ input:required {
 	overflow-y: scroll;
 }
 
+.scroll-comament-1000 {
+	height: 1000px;
+	overflow-y: scroll;
+}
+
 .scroll-comament-200 {
 	height: 236px;
 	overflow-y: scroll;
@@ -2376,6 +2381,18 @@ input:required {
 	color: #0040ff;
 }
 
+.text-black {
+	color: #000 !important;
+}
+
+.text-black a {
+	color: #000 !important;
+}
+
+.text-black a:hover {
+	color: #0040ff !important;
+}
+
 .text-grey {
 	color: #d0d3df;
 }
@@ -2399,6 +2416,18 @@ input:required {
 
 .no-border-right {
 	border-right: none !important;
+}
+
+.no-border-all {
+	border: unset !important
+}
+
+.border {
+	border: 1px solid #cccc !important
+}
+
+.border-right {
+	border: 1px solid #cccc !important
 }
 
 .bg-grey {
@@ -2452,22 +2481,22 @@ input:required {
 	font-size: 200%;
 	line-height: 1.2;
 	color: #ddd;
-	text-shadow: 1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0, 0, 0, .5);
+	/* text-shadow: 1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0, 0, 0, .5); */
 }
 
 .rating:not(:checked)>label:before {
-	content: '★ ';
+	/* content: '★ '; */
 }
 
 .rating>input:checked~label {
-	color: #f70;
-	text-shadow: 1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0, 0, 0, .5);
+	color: #ffe800;
+	/* text-shadow: 1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0, 0, 0, .5); */
 }
 
 .rating:not(:checked)>label:hover,
 .rating:not(:checked)>label:hover~label {
-	color: gold;
-	text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
+	color: #ffe800;
+	/* text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5); */
 }
 
 .rating>input:checked+label:hover,
@@ -2475,8 +2504,12 @@ input:required {
 .rating>input:checked~label:hover,
 .rating>input:checked~label:hover~label,
 .rating>label:hover~input:checked~label {
-	color: #ea0;
-	text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
+	color: #ffe800;
+	/* text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5); */
+}
+
+.size_rating {
+	font-size: 3em !important;
 }
 
 .rating>label:active {

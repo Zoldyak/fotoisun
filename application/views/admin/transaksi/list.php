@@ -29,7 +29,8 @@
                 <tr>
                   <th>photograper</th>
                   <th>Nama Paet</th>
-                  <th>Harga</th>
+                  <th>Harga paket</th>
+                  <th>Total Pembayaran</th>
                   <th>Tanggal Booking</th>
                   <th>Tipe</th>
                   <th>Lokasi</th>
@@ -47,7 +48,8 @@
                     <tr>
                       <td><?php echo $row_daftar['photograper']?></td>
                       <td><?php echo $row_daftar['nama_paket']?></td>
-                      <td><?php echo $row_daftar['harga']?></td>
+                      <td><?php echo nominal($row_daftar['harga'])?></td>
+                      <td><?php echo nominal($row_daftar['total_harga'])?></td>
                       <td><?php echo $row_daftar['tanggal_booking']?></td>
                       <td><?php echo $row_daftar['tipe_foto']?></td>
                       <td><?php echo $row_daftar['lokasi_foto']?></td>

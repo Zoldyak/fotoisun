@@ -15,6 +15,13 @@ class MF_booking extends CI_Model{
     $this->db->where('booking.username', $username);
     return $this->db->get('booking');
   }
+  public function harga_paket($idpaket)
+  {
+    // code...
+    $this->db->select('*');
+    $this->db->where('id_paket', $idpaket);
+    return $this->db->get('paket_foto');
+  }
   public function status_persetujuan_terbaca_oleh_custumor($username)
   {
     $data = array('status_persetujuan_terbaca_oleh_custumor' =>"sudah terbaca" , );

@@ -31,7 +31,8 @@
                         <th>Penyewa</th>
 												<th>no hp</th>
                         <th>Nama Paet</th>
-                        <th>Harga</th>
+												<th>Harga Peket</th>
+                        <th>Total Harga</th>
                         <th>Tanggal Booking</th>
                         <th>Tipe</th>
                         <th>Lokasi</th>
@@ -48,7 +49,8 @@
                       <td><?php echo $row_daftar['nama_lengkap']?></td>
 											<td><?php echo $row_daftar['no_hp']?></td>
                       <td><?php echo $row_daftar['nama_paket']?></td>
-                      <td><?php echo $row_daftar['harga']?></td>
+											<td><?php echo nominal($row_daftar['harga'])?></td>
+                      <td><?php echo nominal($row_daftar['total_harga'])?></td>
                       <td><?php echo $row_daftar['tanggal_booking']?></td>
                       <td><?php echo $row_daftar['tipe_foto']?></td>
                       <td><?php echo $row_daftar['lokasi_foto']?></td>
@@ -73,7 +75,7 @@
 														<td><a href="#" class="btn btn-danger"> <?php echo $row_daftar['jenis_pembayaran']?></a></td>
                     <?php  } ?>
 
-                    
+
                     </tr>
 										<div class="modal fade" id="exampleModal<?php echo $row_daftar['id_booking']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										  <div class="modal-dialog modal-lg" role="document">

@@ -36,7 +36,7 @@
                         <th>Lokasi</th>
                         <th>Persetujuan</th>
                         <th>Pembayaran</th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
                     <tr>
                       <td><?php echo $row_daftar['photograper']?></td>
                       <td><?php echo $row_daftar['nama_paket']?></td>
-                      <td><?php echo $row_daftar['harga']?></td>
+                      <td><?php echo nominal($row_daftar['total_harga'])?></td>
                       <td><?php echo $row_daftar['tanggal_booking']?></td>
                       <td><?php echo $row_daftar['tipe_foto']?></td>
                       <td><?php echo $row_daftar['lokasi_foto']?></td>

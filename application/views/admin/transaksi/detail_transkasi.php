@@ -1,5 +1,5 @@
 <?php
-$total_sisa=$tagihan['harga']- $total_tagihan['jumlah_transaksi'];
+$total_sisa=$tagihan['total_harga']- $total_tagihan['jumlah_transaksi'];
 $this->uri->segment(4);
  ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -48,7 +48,7 @@ $this->uri->segment(4);
                      <td><img  class="img-responsive" src="<?php echo $this->config->item('frontend') ?>/img/transaksi/<?php echo $row_daftar['foto_transaksi']?>" ></td>
                      <td><?php echo $row_daftar['status']?></td>
                      <td><?php echo $row_daftar['keterangan']?></td>
-                     <td><?php echo $row_daftar['jumlah_transaksi']?></td>
+                     <td><?php echo nominal($row_daftar['jumlah_transaksi'])?></td>
 
                      <td>
                        <?php if ($this->uri->segment(4)=="Transfer"): if ($row_daftar['status']=='Menunggu Konfirmasi Admin') {?>
@@ -111,9 +111,9 @@ $this->uri->segment(4);
                <tfoot>
                  <tr>
                    <th  >Total</th>
-                     <th><?php echo $tagihan['harga'] ?></th>
+                     <th><?php echo nominal($tagihan['total_harga']) ?></th>
                    <th  >-</th>
-                   <th  ><?php echo $total_tagihan['jumlah_transaksi'] ?></th></th>
+                   <th  ><?php echo nominal($total_tagihan['jumlah_transaksi']) ?></th></th>
                    <?php
                      if ($total_sisa<=0) {?>
                        <th><button type="button" class="btn btn-success">
@@ -124,7 +124,7 @@ $this->uri->segment(4);
                    ?>
                    <th><button type="button" class="btn btn-danger">
                      <?php
-                     echo "Sisa:".$total_sisa ?>
+                     echo "Sisa:".nominal($total_sisa) ?>
                    </button>
                      </th><?php } ?>
                      <td></td>

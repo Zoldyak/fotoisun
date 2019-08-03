@@ -8,6 +8,7 @@ class Transaksi extends CI_Controller{
     parent::__construct();
     $this->load->model('MA_Register');
     $this->load->model('MA_booking');
+    date_default_timezone_set('Asia/Jakarta');
     //Codeigniter : Write Less Do More
   }
 

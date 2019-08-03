@@ -41,6 +41,9 @@ class CF_pesan extends CI_Controller{
     $valid->set_rules('tanggal_booking','tanggal_booking','required');
     $valid->set_rules('tipe','tipe','required');
     $valid->set_rules('pembayaran','pembayaran','required');
+    $idpaket=$i->post('paket_foto');
+    $listhargapaket= $this->MF_booking->harga_paket($idpaket)->row_array();
+    $totalbayar=$listhargapaket['harga']+10000;
     // $valid->set_rules('lokasi','lokasi','required');
     if ($valid->run() != false) {
       $dataform = array('username' => $i->post('penyewa'),
@@ -51,7 +54,8 @@ class CF_pesan extends CI_Controller{
                          'jenis_pembayaran'=> $i->post('pembayaran'),
                          'lokasi_foto'=> $i->post('lokasi'),
                          'persetujuan'=>"Menunggu Persetujuan Photographer",
-                          'status_booking'=>'baru');
+                          'status_booking'=>'baru',
+                          'total_harga'=>$totalbayar);
 
           $this->MF_booking->add_booking($dataform);
           redirect(base_url(''));
@@ -73,6 +77,19 @@ class CF_pesan extends CI_Controller{
       </div>
     </div>';
 
+
+  }
+  public function cek_tanggal()
+  {
+    $tanggal=$this->input->post('tanggal');
+    $userphotograper=$this->input->post('photograper');
+    $listpaket=$this->MF_user->ajax_cek_tanggal($tanggal,$userphotograper)->num_rows();
+    // echo $listpaket;
+    if ($listpaket > 0) {
+      echo "Sudah ada";
+    } else {
+      echo "Tidak ada";
+    }
 
   }
 

@@ -8,6 +8,7 @@ class CF_dashbord extends CI_Controller{
     parent::__construct();
     $this->load->model('MF_user');
     $this->load->model(array('MF_user','MF_booking'));
+    date_default_timezone_set('Asia/Jakarta');
     //Codeigniter : Write Less Do More
   }
 

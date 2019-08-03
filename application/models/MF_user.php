@@ -93,4 +93,12 @@ function input_data($dataform){
     $this->db->where('username', $username);
     return $this->db->get('riwayat_pekerjaan');
   }
+  public function ajax_cek_tanggal($tanggal,$userphotograper)
+  {
+    $this->db->select('*');
+    $this->db->where('tanggal_booking', $tanggal);
+    $this->db->where('photograper', $userphotograper);
+    $this->db->where('persetujuan', 'Disetujui');
+    return $this->db->get('booking');
+  }
 }

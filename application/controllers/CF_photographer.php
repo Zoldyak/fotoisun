@@ -20,6 +20,8 @@ class CF_photographer extends CI_Controller{
   }
   function detail(){
     $load=$this->load;
+    $iduser=$this->uri->segment(3);
+      $rowid= $this->MF_user->$iduser($username)->row_array();
     $username=$this->uri->segment(3);
     //echo "saya".$username;
     $listdata= $this->MF_user->detail_fotografer($username)->row_array();

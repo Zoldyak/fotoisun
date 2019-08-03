@@ -62,7 +62,7 @@
                 <?php echo $bintang ?>
                 </ul>
                 <div class="text-right">
-                  <p class="text-red">Photographer</p><a href="<?php echo base_url('CF_photographer/detail/'.$row['username'])?>" class="btn btn-primary text-right">Detail</a>
+                  <p class="text-red">Photographer</p><a href="<?php echo base_url('CF_photographer/detail/'.$row['id_user'])?>" class="btn btn-primary text-right">Detail</a>
                 </div>
 
             </div>
